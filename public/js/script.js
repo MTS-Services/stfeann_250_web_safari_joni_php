@@ -162,3 +162,68 @@ document.addEventListener("DOMContentLoaded", () => {
   confirmEyeSlash.style.display = "block";
 });
 
+// ////////////////////////////////////////////////////details page js
+const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    spaceBetween: 20, 
+    breakpoints: {
+        0: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+        },
+        640: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+        },
+        1024: {
+            slidesPerView: 5, 
+            spaceBetween: 20, 
+        },
+    },
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("thumbnailScroll");
+    const mainImage = document.getElementById("mainImage");
+    const thumbnails = container.querySelectorAll("img");
+
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener("click", () => {
+            mainImage.src = thumb.src;
+        });
+    });
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeft - walk;
+    });
+});
