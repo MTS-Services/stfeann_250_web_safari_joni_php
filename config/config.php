@@ -38,7 +38,7 @@ function redirectIfNotLoggedIn() {
 
 function redirectIfLoggedIn() {
     if (isLoggedIn()) {
-        header('Location: dashboard.php');
+        header('Location: pages/backend/dashboard.php');
         exit();
     }
 }

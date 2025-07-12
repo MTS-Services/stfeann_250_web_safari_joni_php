@@ -16,10 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare("SELECT id, name, email, password FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        // var_dump($user);
-        // die();
-        // var_dump(password_verify($password, $user['password']));
-        // die();
         
         if ($user && password_verify($password, $user['password'])) {
             // Login successful
@@ -27,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
             
-            header('Location: /../dashboard.php');
+            header('Location: /../backend.php?page=dashboard');
             exit();
         } else {
             $_SESSION['error'] = 'Invalid email or password';

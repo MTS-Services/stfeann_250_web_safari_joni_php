@@ -2,7 +2,7 @@
     <header>
         <nav>
             <?php if (isLoggedIn()): ?>
-                <a href="/dashboard.php">Dashboard</a>
+                <a href="backend.php?page=dashboard">Dashboard</a>
                 <a href="/auth/logout.php">Logout</a>
             <?php else: ?>
                 <a href="?page=home">Home</a> |

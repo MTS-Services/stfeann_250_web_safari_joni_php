@@ -1,3 +1,1 @@
-<?php
-echo "<p>Welcome to the Home Page!</p>";
-echo "<p>" . sayHello("Visitor") . "</p>";
+<h1>Welcome to the Home Page</h1>
