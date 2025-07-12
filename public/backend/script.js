@@ -26,26 +26,27 @@ window.addEventListener('resize', () => {
 ///////////////////////
 /// User Avatar Dropdown ///
 ///////////////////////
-const avatar = document.getElementById('avatar');
-const dropdown = document.getElementById('dropdown');
+    const avatar = document.getElementById('avatar');
+    const avatar_dropdown = document.getElementById('avatarDropdown');
 
-avatar.addEventListener('click', function () {
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-});
+    avatar.addEventListener('click', function (e) {
+        e.stopPropagation(); // Prevent click from bubbling to document
+        avatar_dropdown.style.display = 
+            avatar_dropdown.style.display === 'block' ? 'none' : 'block';
+    });
 
-// Hide dropdown if clicked outside
-document.addEventListener('click', function (e) {
-    if (!avatar.contains(e.target) && !dropdown.contains(e.target)) {
-        dropdown.style.display = 'none';
-    }
-});
+    document.addEventListener('click', function (e) {
+        if (!avatar.contains(e.target) && !avatar_dropdown.contains(e.target)) {
+            avatar_dropdown.style.display = 'none';
+        }
+    });
+
 
 //////////////////////
 /// Actions Icons ///
 //////////////////////
 function toggleDropdown(icon) {
     const menu = icon.nextElementSibling;
-    // Close all other dropdowns first
     document.querySelectorAll('.dropdown-menu').forEach(m => {
         if (m !== menu) m.style.display = 'none';
     });
