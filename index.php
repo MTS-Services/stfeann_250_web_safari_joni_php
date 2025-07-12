@@ -21,18 +21,24 @@ $pageTitle = ucfirst($page); // Optional: for title display
 
 <body>
 
-    <?php include __DIR__ . '/includes/header.php'; ?>
+    <?php if ($page !== 'login' && $page !== 'register') {
+        include __DIR__ . '/includes/header.php';
+    }
+    
 
-    <?php
+    
     $pageFile = __DIR__ . "/pages/{$page}.php";
     if (file_exists($pageFile)) {
         include $pageFile;
     } else {
         echo "<h2>404 - Page not found</h2>";
     }
-    ?>
+    
 
-    <?php include __DIR__ . '/includes/footer.php'; ?>
+     if ($page !== 'login' && $page !== 'register') {
+        include __DIR__ . '/includes/footer.php';
+
+    }?>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/public/js/script.js"></script>

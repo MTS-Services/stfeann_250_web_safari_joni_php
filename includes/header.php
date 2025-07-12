@@ -67,8 +67,8 @@
                                     <div class="navbar_modal-content">
                                         <h3>Welcome!</h3>
                                         <div class="navbar_modal-buttons-inline">
-                                            <a href="#" class="navbar_modal-button navbar_primary-button">User Login</a>
-                                            <a href="#" class="navbar_modal-button navbar_secondary-button">Create
+                                            <a href="?page=login" class="navbar_modal-button navbar_primary-button">User Login</a>
+                                            <a href="?page=register" class="navbar_modal-button navbar_secondary-button">Create
                                                 Account</a>
                                         </div>
                                         <div class="navbar_modal-admin-login">
@@ -89,9 +89,9 @@
                 </div>
 
                 <div id="mobile-menu" class="navbar_mobile-nav navbar_hidden">
-                    <a href="#" class="navbar_mobile-nav-link navbar_active">Início</a>
-                    <a href="#" class="navbar_mobile-nav-link">Loja</a>
-                    <a href="#" class="navbar_mobile-nav-link">Sobre nós</a>
+                    <a href="?page=home" class="navbar_mobile-nav-link navbar_active">Início</a>
+                    <a href="?page=shop" class="navbar_mobile-nav-link">Loja</a>
+                    <a href="?page=about" class="navbar_mobile-nav-link">Sobre nós</a>
                 </div>
             </nav>
         </section>

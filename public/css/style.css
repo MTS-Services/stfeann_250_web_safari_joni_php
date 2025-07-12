@@ -285,11 +285,19 @@
 .navbar_user-modal {
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border: none;
     max-width: 500px;
     width: 90%;
+
+    /* ✅ Center the dialog */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
 
 .navbar_user-modal::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
@@ -1519,7 +1527,6 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 .footer-social-link-desktop.twitter-desktop .footer-social-overlay {
     background: linear-gradient(to right, var(--blue-500), var(--blue-600));
 }
-
 .footer-social-link-desktop.pinterest-desktop .footer-social-overlay {
     background: linear-gradient(to right, var(--pink-500), var(--purple-600));
 }
@@ -2111,3 +2118,154 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 /* =============================================================================
    END OF STYLESHEET
    ============================================================================= */
+
+   /* login */
+
+/* Body & Wrapper */
+.login_body {
+  background-color: #dee3ec;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login_wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Card */
+.login_card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s;
+}
+
+.login_card:hover {
+  transform: scale(1.01);
+}
+
+/* Title */
+.login_title {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #e2e8f0;
+}
+
+/* User Icon */
+.login_user-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.login_user-icon {
+  width: 60px;
+  height: 60px;
+  color: #94a3b8;
+}
+
+/* Form Fields */
+.login_form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login_label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+  color: #cbd5e1;
+}
+
+.login_input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #64748b;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.login_input:focus {
+  border-color: #e11d48;
+}
+
+/* Eye Icon */
+.login_eye {
+  position: absolute;
+  top: 40px;
+  right: 12px;
+  cursor: pointer;
+  display: block;
+}
+
+.login_eye-icon {
+  width: 20px;
+  height: 20px;
+  color: #94a3b8;
+}
+
+/* Checkbox */
+.login_checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* Actions */
+.login_actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.login_btn {
+  background-color: #e11d48;
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.login_btn:hover {
+  background-color: #be123c;
+  transform: scale(1.03);
+}
+
+.login_link {
+  color: #60a5fa;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.login_link:hover {
+  text-decoration: underline;
+}
+
+/* Register Text */
+.login_register {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
