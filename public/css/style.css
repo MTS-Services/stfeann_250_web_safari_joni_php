@@ -1416,7 +1416,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     justify-content: center !important;
     align-items: center !important;
     text-align: center !important;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .footer-column {
@@ -1479,6 +1479,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 .footer-description-text {
     text-align: center !important;
     font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* Desktop Social Links */
@@ -1486,7 +1487,8 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     display: flex !important;
     justify-content: center !important;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1.25rem;
+
 }
 
 .footer-social-link-desktop {
@@ -1585,7 +1587,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     height: 1.25rem;
     color: var(--text-primary);
     flex-shrink: 0;
-    margin-top: 0.125rem;
+    margin-right: 0.5rem;
 }
 
 .footer-label {
