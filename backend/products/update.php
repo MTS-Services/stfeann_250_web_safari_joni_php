@@ -13,7 +13,6 @@ try {
             $_SESSION[$field] = ucfirst($field) . ' is required.';
             $hasError = true;
         } else {
-            // আগের error মুছে ফেলতে চাইলে
             unset($_SESSION[$field]);
         }
     }

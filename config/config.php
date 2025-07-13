@@ -1,7 +1,7 @@
 <?php
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'stfeen');
+define('DB_NAME', 'stfeann_250');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('APP_NAME', 'Valgrit');

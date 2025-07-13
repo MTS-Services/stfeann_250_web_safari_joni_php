@@ -1,11 +1,19 @@
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <div class="logo">
-            <a href="backend.php?page=dashboard">Dashboard</a>
+        <div class="logo text-center">
+            <a href="/">
+                <img src="/../../../public/backend/images/header-logo.png" alt="">
+            </a>
         </div>
     </div>
     <nav>
         <ul class="nav-menu">
+            <li class="nav-item ">
+                <a href="backend.php?page=dashboard" class="nav-link <?= $page === 'dashboard' ? 'active' : '' ?>">
+                    <span><i class="fas fa-tachometer-alt"></i></span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
             <li class="nav-item ">
                 <a href="backend.php?folder=user&page=index" class="nav-link <?= $folder === 'user' ? 'active' : '' ?>">
                     <span><i class="fas fa-tachometer-alt"></i></span>
