@@ -2,8 +2,11 @@
 require_once __DIR__ . '/../../../config/config.php';
 require_once __DIR__ . '/../../../config/function.php';
 $categories = getAllCategories();
-// var_dump($categories);
-// die();
+
+$id = $_GET['id'] ?? null;
+if ($id) {
+    $pdo->prepare("DELETE FROM categories WHERE id = ?")->execute([$id]);
+}
 ?>
 <div class="table-container">
     <table class="table">
@@ -29,7 +32,7 @@ $categories = getAllCategories();
                     <td><?= htmlspecialchars($category['name']) ?></td>
                     <td><?= htmlspecialchars($category['description']) ?></td>
                     <td>
-                        <img src="/uploads/<?= htmlspecialchars($category['image']) ?>"
+                        <img src="/public/uploads/<?= $category['image'] ?>"
                             alt="<?= htmlspecialchars($category['name']) ?>"
                             width="100">
                     </td>
@@ -40,10 +43,10 @@ $categories = getAllCategories();
                         <div class="action-icon dropdown">
                             <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
                             <div class="dropdown-menu" style="display: none;">
-                                <a href="edit.php?id=<?= $category['id'] ?>">
+                                <a href="/backend.php?folder=categories&page=edit&id=<?= $category['id'] ?>">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
-                                <a href="delete.php?id=<?= $category['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
+                                <a href="../../../backend/categories/delete.php?id=<?= $category['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
                                 <a href="toggle_status.php?id=<?= $category['id'] ?>">

@@ -28,11 +28,14 @@ function getProduct($id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function getAllUsers() {
+    $pdo = getDBConnection(); // Safe & proper connection
+    $stmt = $pdo->query("SELECT * FROM users ORDER BY sort_order ASC");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 function getUser($id) {
-    global $pdo;
+    $pdo = getDBConnection(); // Safe & proper connection
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
-
