@@ -1,8 +1,8 @@
-
 <div class="table-container">
+
     <div class="table-header">
         <h2 class="table-title">User List</h2>
-        <a href="/backend.php?folder=user&page=create" class="create_button">Add New</a>
+        <a href="form_create.php" class="btn btn-primary">Add New</a>
     </div>
     <table class="table">
         <thead>
