@@ -8,8 +8,8 @@ $pdo = getDBConnection();
 redirectIfNotLoggedIn();
 
 // $page = $_GET['page'] ?? 'dashboard';
-$folder = $_GET['folder'] ?? 'backend';
-$page = $_GET['page'] ?? 'dashboard';
+$folder = $_GET['folder'] ?? null;
+$page = $_GET['page'] ?? null;
 
 $folder = basename($folder);
 $page = basename($page);

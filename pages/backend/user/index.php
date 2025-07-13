@@ -2,7 +2,7 @@
 
     <div class="table-header">
         <h2 class="table-title">User List</h2>
-        <a href="form_create.php" class="btn btn-primary">Add New</a>
+        <a href="backend.php?folder=user&page=create" class="btn btn-primary">Add New</a>
     </div>
     <table class="table">
         <thead>
