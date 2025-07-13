@@ -2,9 +2,17 @@
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/function.php';
 
+
+$pdo = getDBConnection();
+
 redirectIfNotLoggedIn();
 
+// $page = $_GET['page'] ?? 'dashboard';
+$folder = $_GET['folder'] ?? 'backend';
 $page = $_GET['page'] ?? 'dashboard';
+
+$folder = basename($folder);
+$page = basename($page);
 $pageTitle = ucfirst($page);
 
 ?>
@@ -34,7 +42,8 @@ $pageTitle = ucfirst($page);
 
             <!-- Stats Cards -->
             <?php
-            $pageFile = __DIR__ . "/pages/backend/{$page}.php";
+            $pageFile = __DIR__ . "/pages/backend/{$folder}/{$page}.php";
+
             if (file_exists($pageFile)) {
                 include $pageFile;
             } else {
@@ -42,8 +51,18 @@ $pageTitle = ucfirst($page);
             }
             ?>
 
+
+            <!-- <?php
+                    $pageFile = __DIR__ . "/pages/backend/{$page}.php";
+                    if (file_exists($pageFile)) {
+                        include $pageFile;
+                    } else {
+                        echo "<h2>404 - Page not found</h2>";
+                    }
+                    ?> -->
+
             <!-- Recent Orders Table -->
-            
+
         </main>
     </div>
 
