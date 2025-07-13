@@ -1,5 +1,8 @@
-<div class="table-container"></div>
+<div class="table-container">
 <table class="table">
+    <div class="table-header">
+        <a href="create.php" class="btn btn-primary">Create New</a>
+    </div>
     <thead>
         <tr>
             <th>ID</th>
