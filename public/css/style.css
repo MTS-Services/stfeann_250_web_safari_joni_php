@@ -2022,7 +2022,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 
     /* Home Page Responsive */
     .home_page_product-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     /* Footer Responsive */
@@ -2125,53 +2125,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     }
 }
 
-@media (max-width: 768px) {
-    .search_page_product-card {
-        flex-direction: column;
-    }
 
-    .search_page_product-image {
-        height: 200px;
-        border-radius: 15px;
-    }
-
-    .search_page_title {
-        font-size: 2rem;
-    }
-
-    .search_page_product-price {
-        font-size: 1.125rem;
-    }
-
-    .search_page_view-button {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.875rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .search_page_title {
-        font-size: 1.5rem;
-    }
-
-    .search_page_product-description {
-        font-size: 0.75rem;
-    }
-
-    .search_page_product-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .search_page_product-footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .search_page_view-button {
-        width: 100%;
-        justify-content: center;
-    }
-}
 
 /* =============================================================================
    END OF STYLESHEET
@@ -2459,11 +2413,57 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 .search_page_view-button:hover {
     background-color: #dc2626;
 }
+@media (max-width: 768px) {
+    .search_page_product-card {
+        flex-direction: column;
+    }
 
+    .search_page_product-image {
+        height: 200px;
+        border-radius: 15px;
+    }
+
+    .search_page_title {
+        font-size: 2rem;
+    }
+
+    .search_page_product-price {
+        font-size: 1.125rem;
+    }
+
+    .search_page_view-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .search_page_title {
+        font-size: 1.5rem;
+    }
+
+    .search_page_product-description {
+        font-size: 0.75rem;
+    }
+
+    .search_page_product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search_page_product-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search_page_view-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
 /* 📱------------------------------------------------------------------------- details page ------------------------------------------------------------*/
 
 #detail{
-    margin-top:7rem;
+    margin-top:70rem;
 }
 /* Container for details page */
 .detail-container {
