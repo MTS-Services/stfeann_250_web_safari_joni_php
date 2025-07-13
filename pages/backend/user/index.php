@@ -4,7 +4,6 @@ require_once __DIR__ . '/../../../config/function.php';
 $users = getAllUsers();
 ?>
 <div class="table-container">
-
     <div class="table-header">
         <h2 class="table-title">User List</h2>
         <a href="/backend.php?folder=user&page=create" class="btn btn-primary">Add New</a>
@@ -29,9 +28,11 @@ $users = getAllUsers();
                     <td><?= $user['name'] ?></td>
                     <td><?= $user['email'] ?></td>
                     <td>
-                        <img src="/public/uploads/<?= htmlspecialchars($user['image']) ?>"
-                            alt="<?= htmlspecialchars($user['name']) ?>"
-                            width="100">
+                        <?php if (!empty($user['image'])): ?>
+                            <img src="/public/uploads/<?= htmlspecialchars($user['image']) ?>" alt="<?= htmlspecialchars($user['name']) ?>" width="100">
+                        <?php else: ?>
+                            <p>No image</p>
+                        <?php endif; ?>
                     </td>
                     <td>
                         <a href="../../../backend/user/toggle_status.php?id=<?= $user['id'] ?>" onclick="return confirm('Change status?')">
@@ -40,7 +41,8 @@ $users = getAllUsers();
                             </span>
                         </a>
                     </td>
-                    <td><a href="../../../backend/user/toggle_admin.php?id=<?= $user['id'] ?>" onclick="return confirm('Change admin status?')">
+                    <td>
+                        <a href="../../../backend/user/toggle_admin.php?id=<?= $user['id'] ?>" onclick="return confirm('Change admin status?')">
                             <span class="status-badge error"><?= $user['is_admin'] ? 'Yes' : 'No' ?></span>
                         </a>
                     </td>
@@ -49,12 +51,13 @@ $users = getAllUsers();
                         <div class="action-icon dropdown">
                             <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
                             <div class="dropdown-menu" style="display: none;">
+                                <a href="#" class="openModalBtn" data-user='<?= json_encode($user) ?>'>
+                                    <i class="fa fa-eye"></i> View
+                                </a>
                                 <a href="/backend.php?folder=user&page=edit&id=<?= $user['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
                                 <a href="../../../backend/user/delete.php?id=<?= $user['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
                                 <a href="../../../backend/user/toggle_status.php?id=<?= $user['id'] ?>"><i class="fa fa-toggle-on"></i> Toggle Status</a>
-                                <a href="../../../backend/user/toggle_admin.php?id=<?= $user['id'] ?>">
-                                    <i class="fa fa-toggle-on"></i> Toggle Admin
-                                </a>
+                                <a href="../../../backend/user/toggle_admin.php?id=<?= $user['id'] ?>"><i class="fa fa-toggle-on"></i> Toggle Admin</a>
                             </div>
                         </div>
                     </td>
@@ -62,5 +65,65 @@ $users = getAllUsers();
             <?php endforeach; ?>
         </tbody>
     </table>
-
 </div>
+
+<!-- Modal -->
+<div id="userDetailsModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button" style="cursor:pointer;">&times;</span>
+        <div class="details-container" id="modalContent">
+            <!-- Filled via JS -->
+        </div>
+    </div>
+</div>
+
+<!-- JS at the end of body -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("userDetailsModal");
+        const closeBtn = document.querySelector(".close-button");
+
+        document.querySelectorAll(".openModalBtn").forEach(btn => {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                const user = JSON.parse(this.dataset.user);
+                const modalContent = document.getElementById("modalContent");
+
+                let imageHTML = user.image ?
+                    `<img src="/public/uploads/${user.image}" alt="${user.name}" width="100">` :
+                    'No Image Available';
+
+                modalContent.innerHTML = `
+                    <h2>User Details</h2>
+                    <table>
+                        <tr><td><strong>ID:</strong></td><td>${user.id}</td></tr>
+                        <tr><td><strong>Name:</strong></td><td>${user.name}</td></tr>
+                        <tr><td><strong>Email:</strong></td><td>${user.email}</td></tr>
+                        <tr><td><strong>Status:</strong></td><td>${user.status ? 'Active' : 'Inactive'}</td></tr>
+                        <tr><td><strong>Is Admin:</strong></td><td>${user.is_admin ? 'Yes' : 'No'}</td></tr>
+                        <tr><td><strong>Created At:</strong></td><td>${user.created_at}</td></tr>
+                        <tr><td><strong>Image:</strong></td><td>${imageHTML}</td></tr>
+                    </table>
+                `;
+
+                modal.style.display = "flex";
+
+            });
+        });
+
+        closeBtn.addEventListener("click", () => modal.style.display = "none");
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+
+    // Optional: Toggle dropdown
+    function toggleDropdown(icon) {
+        const dropdown = icon.nextElementSibling;
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+</script>
