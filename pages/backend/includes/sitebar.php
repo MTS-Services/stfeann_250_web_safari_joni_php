@@ -7,19 +7,19 @@
     <nav>
         <ul class="nav-menu">
             <li class="nav-item ">
-                <a href="backend.php?page=user_index" class="nav-link <?= $page === 'user' ? 'active' : '' ?>">
+                <a href="backend.php?folder=user&page=index" class="nav-link <?= $page === 'user' ? 'active' : '' ?>">
                     <span><i class="fas fa-tachometer-alt"></i></span>
                     <span>User</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="backend.php?page=categories" class="nav-link <?= $page === 'categories' ? 'active' : '' ?>">
+                <a  href="backend.php?folder=categories&page=index" class="nav-link <?= $page === 'index' ? 'active' : '' ?>">
                     <span><i class="fas fa-tachometer-alt"></i></span>
                     <span>Categories</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="backend.php?page=products" class="nav-link <?= $page === 'products' ? 'active' : '' ?>">
+                <a href="backend.php?folder=products&page=index" class="nav-link <?= $page === 'products' ? 'active' : '' ?>">
                     <span><i class="fas fa-tachometer-alt"></i></span>
                     <span>Products</span>
                 </a>
