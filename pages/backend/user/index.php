@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/../../../config/config.php';
+require_once __DIR__ . '/../../../config/function.php';
+$users = getAllUsers();
+?>
 <div class="table-container">
 
     <div class="table-header">
@@ -10,44 +15,52 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Image</th>
                 <th>Status</th>
                 <th>Is Admin</th>
-                <th>Date</th>
+                <th>Created At</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            $result = $pdo->query("SELECT * FROM users ORDER BY id DESC");
-            $rows = $result->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($rows as $row) {
-            ?>
+            <?php foreach ($users as $user): ?>
                 <tr>
-                    <td><?= $row['id'] ?></td>
-                    <td><?= $row['name'] ?></td>
-                    <td><?= $row['email'] ?></td>
-                    <td><span class="status-badge success"><?= $row['status'] ? 'Active' : 'Inactive' ?></span></td>
-                    <td><span class="status-badge error"><?= $row['is_admin'] ? 'Yes' : 'No' ?></span></td>
-                    <td><?= htmlspecialchars($row['created_at']) ?></td>
+                    <td><?= $user['id'] ?></td>
+                    <td><?= $user['name'] ?></td>
+                    <td><?= $user['email'] ?></td>
+                    <td>
+                        <img src="/uploads/<?= htmlspecialchars($user['image']) ?>"
+                            alt="<?= htmlspecialchars($user['name']) ?>"
+                            width="100">
+                    </td>
+                    <td>
+                        <a href="../../../backend/user/toggle_status.php?id=<?= $user['id'] ?>" onclick="return confirm('Change status?')">
+                            <span class="status-badge <?= $user['status'] ? 'success' : 'error' ?>">
+                                <?= $user['status'] ? 'Active' : 'Inactive' ?>
+                            </span>
+                        </a>
+                    </td>
+                    <td><a href="../../../backend/user/toggle_admin.php?id=<?= $user['id'] ?>" onclick="return confirm('Change admin status?')">
+                            <span class="status-badge error"><?= $user['is_admin'] ? 'Yes' : 'No' ?></span>
+                        </a>
+                    </td>
+                    <td><?= $user['created_at'] ?></td>
                     <td>
                         <div class="action-icon dropdown">
                             <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
                             <div class="dropdown-menu" style="display: none;">
-                                <a href="edit.php?id=<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
-                                <a href="../../../backend/user/delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
-                                <a href="toggle_status.php?id=<?= $row['id'] ?>">
-                                    <i class="fa fa-toggle-on"></i> Toggle Status
-                                </a>
-                                <a href="toggle_admin.php?id=<?= $row['id'] ?>">
+                                <a href="/backend.php?folder=user&page=edit&id=<?= $user['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
+                                <a href="../../../backend/user/delete.php?id=<?= $user['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
+                                <a href="../../../backend/user/toggle_status.php?id=<?= $user['id'] ?>"><i class="fa fa-toggle-on"></i> Toggle Status</a>
+                                <a href="../../../backend/user/toggle_admin.php?id=<?= $user['id'] ?>">
                                     <i class="fa fa-toggle-on"></i> Toggle Admin
                                 </a>
                             </div>
                         </div>
                     </td>
                 </tr>
-            <?php
-            }
-            ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
+
 </div>

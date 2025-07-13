@@ -1,8 +1,7 @@
 <?php
-session_start();
 require_once __DIR__ . '/../../config/config.php';
 
-$pdo = getDBConnection();
+$pdo = getDBConnection(); 
 $errors = [];
 
 // Get values
@@ -22,16 +21,22 @@ if (empty($id) || !is_numeric($id)) {
     exit;
 }
 
-// Validate basic fields
+// Validation
 if ($name === '') $errors[] = "Name is required.";
+
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Valid email is required.";
 } else {
+    // Check if email already exists for other users
     $check = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ? AND id != ?");
     $check->execute([$email, $id]);
     if ($check->fetchColumn() > 0) {
-        $errors[] = "This email is already used by another user.";
+        $errors[] = "This email is already taken by another user.";
     }
+}
+
+if ($image && $image['error'] !== UPLOAD_ERR_NO_FILE && $image['error'] !== UPLOAD_ERR_OK) {
+    $errors[] = "Image upload failed.";
 }
 
 if ($password !== '') {
@@ -40,10 +45,10 @@ if ($password !== '') {
     if ($password !== $confirm_password) $errors[] = "Passwords do not match.";
 }
 
-if (!in_array($status, ['0', '1'])) $errors[] = "Invalid status value.";
+if (!in_array($status, ['1', '0'])) $errors[] = "Invalid status.";
 if (!in_array($is_admin, ['0', '1'])) $errors[] = "Invalid admin status.";
 
-// On error redirect
+// Redirect if any error
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
     $_SESSION['old'] = [
@@ -52,51 +57,33 @@ if (!empty($errors)) {
         'status' => $status,
         'is_admin' => $is_admin
     ];
-    header("Location: /backend.php?folder=user&page=edit&id=$id");
+    header("Location: /backend.php?folder=user&page=edit&id=" . $id);
     exit;
 }
 
-// Fetch old image filename
-$stmt = $pdo->prepare("SELECT image FROM users WHERE id = ?");
-$stmt->execute([$id]);
-$oldImage = $stmt->fetchColumn();
+// Build update query
+$query = "UPDATE users SET name = ?, email = ?, status = ?, is_admin = ?";
+$params = [$name, $email, $status, $is_admin];
 
-// Prepare new image name (if new image uploaded)
-$imageName = $oldImage;
-if ($image && $image['error'] === UPLOAD_ERR_OK) {
-    $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-    if (in_array($image['type'], $allowedTypes)) {
-        $imageName = uniqid('user_', true) . '_' . basename($image['name']);
-        $uploadDir = __DIR__ . '/../../public/uploads/';
-        $uploadPath = $uploadDir . $imageName;
-
-        // Move new image
-        if (move_uploaded_file($image['tmp_name'], $uploadPath)) {
-            // Delete old image if it exists
-            if ($oldImage && file_exists($uploadDir . $oldImage)) {
-                unlink($uploadDir . $oldImage);
-            }
-        } else {
-            $errors[] = "Failed to move uploaded file.";
-        }
-    } else {
-        $errors[] = "Invalid image format. Allowed: JPG, PNG, WEBP, GIF.";
-    }
-}
-
-// Final SQL build
-$query = "UPDATE users SET name = ?, email = ?, image = ?, status = ?, is_admin = ?";
-$params = [$name, $email, $imageName, $status, $is_admin];
-
+// If password updated
 if ($password !== '') {
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
     $query .= ", password = ?";
-    $params[] = password_hash($password, PASSWORD_BCRYPT);
+    $params[] = $hashedPassword;
 }
 
+// If image uploaded
+if ($image && $image['error'] === UPLOAD_ERR_OK) {
+    $imageName = $image['name']; // You can enhance this with `uniqid()` and upload logic
+    $query .= ", image = ?";
+    $params[] = $imageName;
+}
+
+// Add WHERE clause
 $query .= " WHERE id = ?";
 $params[] = $id;
 
-// Execute
+// Prepare & execute
 $stmt = $pdo->prepare($query);
 if ($stmt->execute($params)) {
     $_SESSION['success'] = "User updated successfully.";
@@ -104,6 +91,6 @@ if ($stmt->execute($params)) {
     exit;
 } else {
     $_SESSION['errors'] = ["Database error: " . $stmt->errorInfo()[2]];
-    header("Location: /backend.php?folder=user&page=edit&id=$id");
+    header("Location: /backend.php?folder=user&page=edit&id=" . $id);
     exit;
 }

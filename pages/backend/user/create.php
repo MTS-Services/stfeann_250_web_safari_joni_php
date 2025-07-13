@@ -1,3 +1,4 @@
+
 <!-- Error Messages -->
 <?php if (!empty($_SESSION['errors'])): ?>
     <div style="color: red; margin-bottom: 10px;">
@@ -17,7 +18,7 @@
 <?php endif; ?>
 
 
-<form class="create_form_container" action="../../../backend/user/create_form.php" method="POST">
+<form class="create_form_container" action="../../../backend/user/create_form.php" method="POST" enctype="multipart/form-data">
     <div class="table-header">
         <h2 class="table-title">User Create</h2>
         <a href="/backend.php?folder=user&page=index" class="create_button">Back</a>
@@ -31,6 +32,10 @@
         <div class="create_form_group">
             <label>Email</label>
             <input type="email" name="email">
+        </div>
+          <div class="create_form_group">
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image">
         </div>
 
         <div class="create_form_group">
