@@ -15,7 +15,6 @@ $pageTitle = ucfirst($page); // Optional: for title display
     <title><?= APP_NAME ?> - <?= $pageTitle ?></title>
     <link rel="icon" type="image/x-icon" href="../public/images/logo.PNG">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
