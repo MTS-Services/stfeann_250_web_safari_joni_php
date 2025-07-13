@@ -420,28 +420,30 @@
      width: 100%;
      border-collapse: collapse;
  }
- .table-header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
+
+ .table-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 1rem;
+     border: 1px solid #e2e8f0;
+     border-radius: 8px;
  }
-    
-    .table-header a {
-        text-decoration: none;
-        color: white;
-        background-color: #3b82f6;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: background-color 0.2s ease;
-    }
-    
-    .table-header a:hover {
-        background-color: #2563eb;
-}
+
+ .table-header a {
+     text-decoration: none;
+     color: white;
+     background-color: #3b82f6;
+     padding: 0.5rem 1rem;
+     border-radius: 8px;
+     font-weight: 600;
+     transition: background-color 0.2s ease;
+ }
+
+ .table-header a:hover {
+     background-color: #2563eb;
+ }
+
  .table th,
  .table td {
      padding: 1rem;
@@ -618,4 +620,82 @@
 
  .overlay.show {
      display: block;
+ }
+
+ /* crete page design */
+ .create_form_container {
+     background-color: #ffffff;
+     padding: 30px;
+     border-radius: 10px;
+     width: 1600px;
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+ }
+
+ .main_create_form {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     gap: 20px;
+     padding: 20px;
+ }
+
+ .main_create_form {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     gap: 20px;
+     padding: 20px;
+ }
+
+ .create_form_container h2 {
+     text-align: center;
+     margin-bottom: 20px;
+     color: #111827;
+ }
+
+ .create_form_group {
+     margin-bottom: 15px;
+     width: 49%;
+ }
+
+ .create_form_group label {
+     display: block;
+     margin-bottom: 6px;
+     color: #374151;
+     font-weight: bold;
+ }
+
+ .create_form_group input,
+ .create_form_group select {
+     width: 100%;
+     padding: 10px;
+     border: 1px solid #cbd5e1;
+     border-radius: 6px;
+     font-size: 14px;
+     background-color: #f9fafb;
+     color: #1f2937;
+ }
+
+ .create_form_group input:focus,
+ .create_form_group select:focus {
+     border-color: #2563eb;
+     outline: none;
+ }
+
+ .create_submit_btn {
+    width: auto;
+     padding: 12px;
+     background-color: #2563eb;
+     color: white;
+     border: none;
+     border-radius: 6px;
+     font-size: 16px;
+     cursor: pointer;
+     display: block;
+     margin-left: auto;
+     margin-right: 0;
+ }
+
+ .create_submit_btn:hover {
+     background-color: #1d4ed8;
  }
