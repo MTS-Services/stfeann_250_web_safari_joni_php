@@ -1,8 +1,15 @@
-
 <section class="login_body">
   <div class="login_wrapper">
     <div class="login_card">
-      <form method="POST" action="/register" class="login_form">
+
+      <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-error" style="text-align: center; color: red; margin-bottom: 10px">
+          <?php echo $_SESSION['error'];
+          unset($_SESSION['error']); ?>
+        </div>
+      <?php endif; ?>
+
+      <form method="POST" action="../auth/register.php" class="login_form">
         <h2 class="login_title">Register</h2>
 
         <!-- Name -->
@@ -60,4 +67,3 @@
     </div>
   </div>
 </section>
-

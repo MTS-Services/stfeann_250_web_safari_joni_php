@@ -6,9 +6,9 @@
         <div class="user-avatar" id="avatar">
             <img src="/public/backend/images/user.avif" alt="User">
         </div>
-        <div class="dropdown-menu" id="dropdown">
-            <a href="/profile.php">👤 Profile</a>
-            <a href="/logout.php">🚪 Logout</a>
+        <div class="dropdown-menu" id="avatarDropdown">
+            <!-- <a href="/profile.php">👤 Profile</a> -->
+            <a href="auth/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
         </div>
     </div>
 </header>
