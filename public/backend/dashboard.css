@@ -692,7 +692,7 @@
  /* crete page design */
  .create_form_container {
      background-color: #ffffff;
-     padding: 30px;
+     padding: 10px;
      border-radius: 10px;
      width: 1600px;
      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
