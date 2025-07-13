@@ -2,9 +2,6 @@
 require_once __DIR__ . '/../../../config/config.php';
 require_once __DIR__ . '/../../../config/function.php';
 
-
-$category_names = getAllCategoryNames();
-
 $data = [
     'name' => '',
     'slug' => '',
@@ -12,18 +9,16 @@ $data = [
     'description' => '',
     'price' => '',
     'category_id' => '',
-    'sort_order' => 0,
-    'status' => 1,
-    'is_featured' => 0
 ];
 
+$id = isset($_GET['id']) ? intval($_GET['id']) : null;
 if (!empty($id)) {
     $data = getProduct($id);
 }
 ?>
-<form class="table-container" action="../../../backend/products/create.php" method="POST">
+<form class="table-container" action="../../../backend/products/update.php?id=<?= $id ?>" method="POST">
     <div class="table-header">
-        <h2 class="table-title">Product Create</h2>
+        <h2 class="table-title">Product Edit</h2>
         <a href="/backend.php?folder=products&page=index" class="create_button">Back</a>
     </div>
     <div class="main_create_form">
@@ -86,20 +81,8 @@ if (!empty($id)) {
             }
             ?>
         </div>
-        <!-- <div class="create_form_group">
-            <label for="category_id">Category</label>
-            <select name="category_id" id="category_id" required>
-                <option value="">Select a category</option>
-                <option value="">Select a category</option>
-                <?php foreach ($category_names as $category) : ?>
-                    <option value="<?= $category['id'] ?>" <?= $category['id'] == $data['category_id'] ? 'selected' : '' ?>><?= $category['name'] ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div> -->
-
-
     </div>
     <div class="flex justify-end">
-        <button class="create_submit_btn" style="margin: 0 20px 20px 0;" type="submit">Create</button>
+        <button class="create_submit_btn" style="margin: 0 20px 20px 0;" type="submit">Update</button>
     </div>
 </form>
