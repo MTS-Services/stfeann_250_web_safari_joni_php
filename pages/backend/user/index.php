@@ -28,8 +28,8 @@ $users = getAllUsers();
                     <td><?= $user['id'] ?></td>
                     <td><?= $user['name'] ?></td>
                     <td><?= $user['email'] ?></td>
-                    <td>
-                        <img src="/public/uploads/<?= htmlspecialchars($user['image']) ?>"
+                   <td>
+                        <img src="/public/uploads/<?= $user['image'] ?>"
                             alt="<?= htmlspecialchars($user['name']) ?>"
                             width="100">
                     </td>

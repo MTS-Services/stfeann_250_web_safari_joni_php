@@ -6,104 +6,76 @@ $pdo = getDBConnection();
 $errors = [];
 
 // Get values
-$id       = $_POST['id'] ?? null;
-$name     = trim($_POST['name'] ?? '');
-$email    = trim($_POST['email'] ?? '');
-$image    = $_FILES['image'] ?? null;
+$name = trim($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$image = $_FILES['image'] ?? null;
 $password = $_POST['password'] ?? '';
 $confirm_password = $_POST['confirm_password'] ?? '';
-$status   = $_POST['status'] ?? '';
+$status = $_POST['status'] ?? '1';
 $is_admin = $_POST['is_admin'] ?? '0';
 
-// Validate ID
-if (empty($id) || !is_numeric($id)) {
-    $_SESSION['errors'] = ["Invalid user ID."];
-    header("Location: /backend.php?folder=user&page=index");
-    exit;
-}
-
-// Validate basic fields
+// Validate input
 if ($name === '') $errors[] = "Name is required.";
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Valid email is required.";
 } else {
-    $check = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ? AND id != ?");
-    $check->execute([$email, $id]);
-    if ($check->fetchColumn() > 0) {
-        $errors[] = "This email is already used by another user.";
-    }
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetchColumn()) $errors[] = "Email already in use.";
+}
+if ($password === '' || strlen($password) < 6) $errors[] = "Password must be at least 6 characters.";
+if ($password !== $confirm_password) $errors[] = "Passwords do not match.";
+if (!in_array($status, ['0', '1']) || !in_array($is_admin, ['0', '1'])) {
+    $errors[] = "Invalid status or admin value.";
 }
 
-if ($password !== '') {
-    if (strlen($password) < 6) $errors[] = "Password must be at least 6 characters.";
-    if ($confirm_password === '') $errors[] = "Confirm password is required.";
-    if ($password !== $confirm_password) $errors[] = "Passwords do not match.";
-}
-
-if (!in_array($status, ['0', '1'])) $errors[] = "Invalid status value.";
-if (!in_array($is_admin, ['0', '1'])) $errors[] = "Invalid admin status.";
-
-// On error redirect
-if (!empty($errors)) {
+// On validation error
+if ($errors) {
     $_SESSION['errors'] = $errors;
-    $_SESSION['old'] = [
-        'name' => $name,
-        'email' => $email,
-        'status' => $status,
-        'is_admin' => $is_admin
-    ];
-    header("Location: /backend.php?folder=user&page=edit&id=$id");
+    $_SESSION['old'] = compact('name', 'email', 'status', 'is_admin');
+    header("Location: /backend.php?folder=user&page=create");
     exit;
 }
 
-// Fetch old image filename
-$stmt = $pdo->prepare("SELECT image FROM users WHERE id = ?");
-$stmt->execute([$id]);
-$oldImage = $stmt->fetchColumn();
-
-// Prepare new image name (if new image uploaded)
-$imageName = $oldImage;
-if ($image && $image['error'] === UPLOAD_ERR_OK) {
-    $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-    if (in_array($image['type'], $allowedTypes)) {
-        $imageName = uniqid('user_', true) . '_' . basename($image['name']);
+// Handle image upload
+    $image = '';
+    if (!empty($_FILES['image']['name'])) {
         $uploadDir = __DIR__ . '/../../public/uploads/';
-        $uploadPath = $uploadDir . $imageName;
-
-        // Move new image
-        if (move_uploaded_file($image['tmp_name'], $uploadPath)) {
-            // Delete old image if it exists
-            if ($oldImage && file_exists($uploadDir . $oldImage)) {
-                unlink($uploadDir . $oldImage);
-            }
-        } else {
-            $errors[] = "Failed to move uploaded file.";
+        if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {
+            throw new Exception('Failed to create upload directory.');
         }
-    } else {
-        $errors[] = "Invalid image format. Allowed: JPG, PNG, WEBP, GIF.";
+
+        $image = time() . '_' . basename($_FILES['image']['name']);
+        $uploadPath = $uploadDir . $image;
+
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+            throw new Exception('Image upload failed.');
+        }
     }
-}
 
-// Final SQL build
-$query = "UPDATE users SET name = ?, email = ?, image = ?, status = ?, is_admin = ?";
-$params = [$name, $email, $imageName, $status, $is_admin];
 
-if ($password !== '') {
-    $query .= ", password = ?";
-    $params[] = password_hash($password, PASSWORD_BCRYPT);
-}
-
-$query .= " WHERE id = ?";
-$params[] = $id;
-
-// Execute
-$stmt = $pdo->prepare($query);
-if ($stmt->execute($params)) {
-    $_SESSION['success'] = "User updated successfully.";
-    header("Location: /backend.php?folder=user&page=index");
+if ($errors) {
+    $_SESSION['errors'] = $errors;
+    header("Location: /backend.php?folder=user&page=create");
     exit;
+}
+
+// Insert user
+$stmt = $pdo->prepare("INSERT INTO users (name, email, image, password, status, is_admin, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+$success = $stmt->execute([
+    $name,
+    $email,
+    $image,
+    password_hash($password, PASSWORD_BCRYPT),
+    $status,
+    $is_admin
+]);
+
+if ($success) {
+    $_SESSION['success'] = "User created successfully.";
+    header("Location: /backend.php?folder=user&page=index");
 } else {
     $_SESSION['errors'] = ["Database error: " . $stmt->errorInfo()[2]];
-    header("Location: /backend.php?folder=user&page=edit&id=$id");
-    exit;
+    header("Location: /backend.php?folder=user&page=create");
 }
+exit;
