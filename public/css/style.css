@@ -2830,6 +2830,10 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
         padding: 1.5rem;
     }
 
+    .navbar_user-action {
+        padding-left: 5px;
+    }
+
     .navbar_desktop-nav {
         gap: 0rem;
         margin-right: -54px;
