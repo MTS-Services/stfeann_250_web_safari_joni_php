@@ -7,14 +7,14 @@ $data = [
     'description' => '',
     'image' => ''
 ];
-
-if (!empty($id)) {
-    $data = getCategory($id);
+$_GET['id'] = $_GET['id'] ?? null;
+if (!empty($_GET['id'])) {
+    $data = getCategory($_GET['id']);
 }
 ?>
-<form class="create_form_container" action="../../../backend/categories/create.php" method="POST" enctype="multipart/form-data">
+<form class="create_form_container" action="../../../backend/categories/update.php?id=<?= $_GET['id'] ?>" method="POST" enctype="multipart/form-data">
     <div class="table-header">
-        <h2 class="table-title">Category Create</h2>
+        <h2 class="table-title">Category Edit</h2>
         <a href="/backend.php?folder=categories&page=index" class="create_button">Back</a>
     </div>
     <div class="main_create_form">
@@ -48,5 +48,5 @@ if (!empty($id)) {
             <textarea name="description" id="description"><?= $data['description'] ?></textarea>
         </div>
     </div>
-    <button class="create_submit_btn" type="submit">Create</button>
+    <button class="create_submit_btn" type="submit">Update</button>
 </form>
