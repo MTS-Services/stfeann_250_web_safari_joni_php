@@ -1,9 +1,7 @@
-
-
 <section class="login_body">
   <div class="login_wrapper">
     <div class="login_card">
-      <form method="POST" action="/login" class="login_form">
+      <form method="POST" action="../auth/login.php" class="login_form">
         <h2 class="login_title">User Login</h2>
 
         <!-- User Icon -->
@@ -21,6 +19,12 @@
         <div class="login_field">
           <label class="login_label" for="email">Email</label>
           <input id="email" name="email" type="email" required placeholder="Email Address" class="login_input" />
+          <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-error" style="color: red; margin-top: 5px">
+              <?php echo $_SESSION['error'];
+              unset($_SESSION['error']); ?>
+            </div>
+          <?php endif; ?>
         </div>
 
         <!-- Password -->
@@ -55,4 +59,3 @@
       </form>
     </div>
   </div>
-

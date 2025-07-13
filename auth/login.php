@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     if (empty($email) || empty($password)) {
         $_SESSION['error'] = 'Please fill in all fields';
-        header('Location: ../index.php?page=login');
+        header('Location: ../../?page=login');
         exit();
     }
     
@@ -27,16 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         } else {
             $_SESSION['error'] = 'Invalid email or password';
-            header('Location: ../index.php?page=login');
+            header('Location: ../../?page=login');
             exit();
         }
     } catch(PDOException $e) {
         $_SESSION['error'] = 'Database error occurred';
-        header('Location: ../index.php?page=login');
+        header('Location: ../../?page=login');
         exit();
     }
 } else {
-    header('Location: ../index.php');
+    header('Location: ../../?page=home');
     exit();
 }
 ?>
