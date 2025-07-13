@@ -2,6 +2,9 @@
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/function.php';
 
+
+$pdo = getDBConnection();
+
 redirectIfNotLoggedIn();
 
 $page = $_GET['page'] ?? 'dashboard';

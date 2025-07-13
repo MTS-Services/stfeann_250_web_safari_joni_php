@@ -7,6 +7,12 @@
     <nav>
         <ul class="nav-menu">
             <li class="nav-item ">
+                <a href="backend.php?page=user_index" class="nav-link <?= $page === 'user' ? 'active' : '' ?>">
+                    <span><i class="fas fa-tachometer-alt"></i></span>
+                    <span>User</span>
+                </a>
+            </li>
+            <li class="nav-item ">
                 <a href="backend.php?page=categories" class="nav-link <?= $page === 'categories' ? 'active' : '' ?>">
                     <span><i class="fas fa-tachometer-alt"></i></span>
                     <span>Categories</span>
