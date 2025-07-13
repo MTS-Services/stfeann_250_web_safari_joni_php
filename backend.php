@@ -13,7 +13,7 @@ $page = $_GET['page'] ?? 'dashboard';
 
 $folder = basename($folder);
 $page = basename($page);
-$pageTitle = ucfirst($page);
+$pageTitle = ucfirst($folder);
 
 ?>
 
@@ -50,18 +50,6 @@ $pageTitle = ucfirst($page);
                 echo "<h2>404 - Page not found</h2>";
             }
             ?>
-
-
-            <!-- <?php
-                    $pageFile = __DIR__ . "/pages/backend/{$page}.php";
-                    if (file_exists($pageFile)) {
-                        include $pageFile;
-                    } else {
-                        echo "<h2>404 - Page not found</h2>";
-                    }
-                    ?> -->
-
-            <!-- Recent Orders Table -->
 
         </main>
     </div>
