@@ -4,7 +4,6 @@ require_once __DIR__ . '/../../../config/function.php';
 
 
 $category_names = getAllCategoryNames();
-
 $data = [
     'name' => '',
     'slug' => '',
@@ -78,10 +77,17 @@ if (!empty($id)) {
 
         <div class="create_form_group">
             <label for="category_id">Category ID</label>
-            <input name="category_id" id="category_id" value="<?= $data['category_id'] ?>">
-            <?php
-            if (isset($_SESSION['category_id'])) {
-                echo '<p class="alert alert-error" style="color: red; margin-top: 5px">' . $_SESSION['category_id'] . '</p>';
+            <select name="category_id" id="">
+                <option value="">Select category</option>
+                <?php foreach ($category_names as $category): ?>
+                    <option value="<?= $category['id'] ?>" <?= $category['name'] == $data['category_id'] ? 'selected' : '' ?>>
+                        <?= $category['name'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <?php if (isset($_SESSION['category_id'])) {
+                echo '<p class="alert alert-error" style="color: red; margin-top: 5px">' . $_SESSION['category_id'] . '</p>
+            ';
                 unset($_SESSION['category_id']);
             }
             ?>

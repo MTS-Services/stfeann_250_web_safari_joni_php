@@ -17,12 +17,19 @@ function getCategory($id)
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+// function getAllCategoryNames()
+// {
+//     global $pdo;
+//     $stmt = $pdo->query("SELECT name FROM categories ORDER BY sort_order ASC");
+//     return $stmt->fetchAll(PDO::FETCH_COLUMN);
+// }
 function getAllCategoryNames()
 {
     global $pdo;
-    $stmt = $pdo->query("SELECT name FROM categories ORDER BY sort_order ASC");
-    return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $stmt = $pdo->query("SELECT id, name FROM categories ORDER BY sort_order ASC");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 function getProductsByCategory($category_id)
 {
     global $pdo;
@@ -47,13 +54,26 @@ function getAllProducts()
 }
 
 
+// function getProduct($id)
+// {
+//     global $pdo;
+//     $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+//     $stmt->execute([$id]);
+//     return $stmt->fetch(PDO::FETCH_ASSOC);
+// }
 function getProduct($id)
 {
     global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt = $pdo->prepare("
+        SELECT products.*, categories.name AS category_name 
+        FROM products 
+        LEFT JOIN categories ON products.category_id = categories.id 
+        WHERE products.id = ?
+    ");
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
 
 function getAllUsers()
 {

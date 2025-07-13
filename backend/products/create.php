@@ -6,26 +6,43 @@ try {
 
     // Basic validation
     $requiredFields = ['name', 'slug', 'price', 'category_id'];
+    $hasError = false;
+
     foreach ($requiredFields as $field) {
-        $_SESSION[$field] = 'Please fill in all fields';
         if (empty($_POST[$field])) {
-            header('Location: ../../backend.php?folder=products&page=create');
+            $_SESSION[$field] = ucfirst($field) . ' is required.';
+            $hasError = true;
+        } else {
+            unset($_SESSION[$field]);
         }
     }
 
+    if ($hasError) {
+        header('Location: ../../backend.php?folder=products&page=create');
+        exit;
+    }
+
+    // $requiredFields = ['name', 'slug', 'price', 'category_id'];
+    // foreach ($requiredFields as $field) {
+    //     $_SESSION[$field] = 'Please fill in all fields';
+    //     if (empty($_POST[$field])) {
+    //         header('Location: ../../backend.php?folder=products&page=create');
+    //     }
+    // }
+
     // Sanitize and assign values
-    $name        = trim($_POST['name']);
-    $slug        = trim($_POST['slug']);
-    $stock_no    = trim($_POST['stock_no']);
+    $name = trim($_POST['name']);
+    $slug = trim($_POST['slug']);
+    $stock_no = trim($_POST['stock_no']);
     $description = trim($_POST['description']);
-    $price       = floatval($_POST['price']);
+    $price = floatval($_POST['price']);
     $category_id = intval($_POST['category_id']);
 
     // Check that category exists
     $checkCat = $pdo->prepare("SELECT id FROM categories WHERE id = ?");
     $checkCat->execute([$category_id]);
-    $_SESSION['category_id'] = 'Category does not exist';
     if (!$checkCat->fetch()) {
+        $_SESSION['category_id'] = 'Category does not exist';
         header('Location: ../../backend.php?folder=products&page=create');
     }
 
