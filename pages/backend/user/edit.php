@@ -10,8 +10,8 @@ $data = [
     'image' => '',
     'password' => '',
     'confirm_password' => '',
-    'status' => 1,
-    'is_admin' => 0
+    'status' => '',
+    'is_admin' => ''    
 ];
 
 if (!empty($id)) {
@@ -41,7 +41,7 @@ if (!empty($id)) {
     <input type="hidden" name="id" value="<?= $id ?>">
     
     <div class="table-header">
-        <h2 class="table-title">Edit User</h2>
+        <h2 class="table-title">User Edit</h2>
         <a href="/backend.php?folder=user&page=index" class="create_button">Back</a>
     </div>
 
@@ -59,7 +59,7 @@ if (!empty($id)) {
         <div class="create_form_group">
             <label>Current Image</label><br>
             <?php if (!empty($data['image'])): ?>
-                <img src="/public/uploads/<?= htmlspecialchars($data['image']) ?>" alt="User Image" width="100">
+                <img src="/uploads/<?= htmlspecialchars($data['image']) ?>" alt="User Image" width="100">
             <?php else: ?>
                 <p>No image uploaded</p>
             <?php endif; ?>
