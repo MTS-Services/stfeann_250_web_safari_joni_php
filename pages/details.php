@@ -1,9 +1,29 @@
+<?php
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../config/function.php';
+
+$data = [
+    'name' => '',
+    'slug' => '',
+    'stock_no' => '',
+    'description' => '',
+    'price' => '',
+    'category_id' => '',
+];
+
+$id = isset($_GET['id']) ? intval($_GET['id']) : null;
+if (!empty($id)) {
+    $data = getProduct($id);
+}
+
+$products = getAllProducts();
+?>
 <section id="detail" class="bg-white">
     <section class="detail-section">
         <div class="detail-container">
             <div class="detail-left">
                 <div class="detail-image-box">
-                    <img id="mainImage" src="../public/images/product (5).PNG" alt="Main Product" class="detail-main-image" />
+                    <img id="mainImage" src="../public/images/n1.png" alt="Main Product" class="detail-main-image" />
                 </div>
                 <div class="detail-slider-wrapper">
                     <div id="thumbnailScroll" class="detail-no-scrollbar">
@@ -17,9 +37,9 @@
 
             <div class="detail-product-info">
                 <p>Home / T-shirt Valgrit</p>
-                <h1 class="detail-title">Product Name</h1>
+                <h1 class="detail-title"><?= htmlspecialchars($data['name']) ?></h1>
                 <div class="detail-rating">★★★★☆ <span>(4.5 Rating)</span></div>
-                <div class="detail-price">Price: 29.99€</div>
+                <div class="detail-price">Price: <?= $data['price'] ?>€</div>
                 <div class="detail-options">
                     <div>
                         <label for="size">Size:</label>
@@ -41,7 +61,7 @@
                 <div class="detail-description">
                     <h2>Descrição</h2>
                     <p>
-                        Descrição do ProdutoCriado para quem dá tudo em cada treino, este modelo combina performance, conforto e estilo num só.Fabricado com materiais respiráveis e de secagem rápida, adapta-se aos movimentos do teu corpo e mantém-te focado, mesmo nas sessões mais intensas. A costura reforçada e o corte ergonómico garantem liberdade total de movimentos — sem distrações, sem limitações.Ideal para treino de força, cardio ou uso no dia a dia. Porque quem vive com disciplina merece roupa à altura da sua dedicação.Porque vestir-se bem também é parte do mindset.Destaques:Tecido técnico com elasticidade e respirabilidadeSecagem rápidaCorte atlético e confortávelCosturas reforçadas para maior durabilidadeProduzido localmente com atenção ao detalhe
+                        <?= htmlspecialchars($data['description']) ?>
                     </p>
                 </div>
             </div>
@@ -53,17 +73,17 @@
         <p>New arrivals for your wardrobe</p>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <?php for ($i = 1; $i < 9; $i++): ?>
+                <?php foreach ($products as $product) : ?>
                    
                         <div class="swiper-slide detail-related-card">
-                            <img src="../public/images/product (<?= $i ?>).PNG" alt="Product Image <?= $i ?>" />
+                            <img src="../public/images/product (<?= $product['id'] ?>).PNG" alt="Product Image <?= $i ?>" />
                             <div class="detail-related-info">
-                                <h5>Static Title</h5>
-                                <h4>Static Price</h4>
+                                <h5><?= htmlspecialchars($product['name']) ?></h5>
+                                <h4>$<?= $product['price'] ?></h4>
                             </div>
                         </div>
                     
-                <?php endfor; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>

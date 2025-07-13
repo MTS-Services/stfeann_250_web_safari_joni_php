@@ -76,9 +76,9 @@ if (!empty($id)) {
         <div class="create_form_group">
             <label for="category_id">Category ID</label>
             <select name="category_id" id="">
-                <option value="<?= $data['id'] ?>"><?= $data['category_name'] ?></option>
+                <option value=" ">Select Category</option>
                 <?php foreach ($category_names as $category): ?>
-                    <option value="<?= $category['id'] ?>" <?= $category['name'] == $data['category_id'] ? 'selected' : '' ?>>
+                    <option value="<?= $category['id'] ?>" <?= $category['id'] == $data['category_id'] ? 'selected' : '' ?>>
                         <?= $category['name'] ?>
                     </option>
                 <?php endforeach; ?>
