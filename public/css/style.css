@@ -2469,10 +2469,40 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 425px) {
     .search_page_title {
         font-size: 1.5rem;
     }
+
+    .navbar_logo-container {
+        flex-shrink: 0;
+        padding-left: 145px;
+    }
+
+    .navbar_search-input {
+
+
+        /* padding: 0.5rem 1.75rem; */
+
+        /* background-color: #ffffff; */
+
+    }
+
+    .navbar_search-button {
+        padding: 0px;
+    }
+
+    .navbar_search-input-group {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .navbar_search-form {
+        max-width: 125px;
+        padding-left: 10px;
+    }
+
 
     .search_page_product-description {
         font-size: 0.75rem;
@@ -2798,6 +2828,20 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     .container {
         flex-direction: column;
         padding: 1.5rem;
+    }
+
+    .navbar_desktop-nav {
+        gap: 0rem;
+        margin-right: -54px;
+    }
+
+    .navbar_nav-actions {
+        gap: 0rem;
+    }
+
+    .navbar_search-form {
+        max-width: 300px;
+        padding-left: 70px;
     }
 
     .detail-left,
