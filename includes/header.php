@@ -38,6 +38,10 @@
                                 Sobre nós
                                 <span class="navbar_nav-link-underline"></span>
                             </a>
+                              <a href="?page=profile" class="navbar_nav-link">
+                                Profile
+                                <span class="navbar_nav-link-underline"></span>
+                            </a>
                         </div>
 
                         <div class="navbar_nav-actions">
