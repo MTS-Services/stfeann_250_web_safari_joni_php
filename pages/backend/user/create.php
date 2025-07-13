@@ -39,13 +39,13 @@
         </div>
         <div class="create_form_group">
             <label>Confirm Password</label>
-            <input type="password" name="confirm_password" required>
+            <input type="password" name="confirm_password">
         </div>
         <div class="create_form_group">
             <label>Status</label>
             <select name="status">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
             </select>
         </div>
 

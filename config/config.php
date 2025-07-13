@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Dhaka');
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'stfeann_250');
@@ -6,6 +7,7 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('APP_NAME', 'Valgrit');
 define('BASE_URL', 'http://localhost/valgrit');
+
 
 function getDBConnection() {
     try {
