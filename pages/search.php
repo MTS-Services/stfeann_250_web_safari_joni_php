@@ -4,7 +4,7 @@
 
     <!-- Product Grid -->
     <div class="search_page_product-grid">
-
+                              
       <!-- Product Card -->
       <div class="search_page_product-card">
         <div class="search_page_product-image">
