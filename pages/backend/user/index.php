@@ -1,6 +1,6 @@
 
 <div class="table-header">
-    <span></span>
+    <h2 class="table-title">User List</h2>
     <a href="form_create.php" class="create_button">Add New</a>
 </div>
 <div class="table-container">
