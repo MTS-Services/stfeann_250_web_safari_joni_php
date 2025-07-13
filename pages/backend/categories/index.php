@@ -34,12 +34,12 @@ if ($id) {
                     <td>
                         <img src="/public/uploads/<?= $category['image'] ?>"
                             alt="<?= htmlspecialchars($category['name']) ?>"
-                            width="100">
+                            width="100" height="100" style="object-fit: cover;">
                     </td>
                     <!-- <span class="status-badge success">Completed</span> -->
-                    <td><span class="<?= $category['status'] == 1 ? 'status-badge success' : 'status-badge error' ?>"><?= $category['status'] == 1 ? 'Active' : 'Inactive' ?></span></td>
+                    <td style="width: 10%;"><span class="<?= $category['status'] == 1 ? 'status-badge success' : 'status-badge error' ?>"><?= $category['status'] == 1 ? 'Active' : 'Inactive' ?></span></td>
                     <td><?= $category['created_at'] ?></td>
-                    <td>
+                    <td style="width: 10%;">
                         <div class="action-icon dropdown">
                             <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
                             <div class="dropdown-menu" style="display: none;">
@@ -49,7 +49,7 @@ if ($id) {
                                 <a href="../../../backend/categories/delete.php?id=<?= $category['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
-                                <a href="toggle_status.php?id=<?= $category['id'] ?>">
+                                <a href="../../../backend/categories/toggle_status.php?id=<?= $category['id'] ?>">
                                     <i class="fa fa-toggle-on"></i> Toggle Status
                                 </a>
                             </div>
