@@ -86,18 +86,6 @@ if (!empty($id)) {
             }
             ?>
         </div>
-        <!-- <div class="create_form_group">
-            <label for="category_id">Category</label>
-            <select name="category_id" id="category_id" required>
-                <option value="">Select a category</option>
-                <option value="">Select a category</option>
-                <?php foreach ($category_names as $category) : ?>
-                    <option value="<?= $category['id'] ?>" <?= $category['id'] == $data['category_id'] ? 'selected' : '' ?>><?= $category['name'] ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div> -->
-
-
     </div>
     <div class="flex justify-end">
         <button class="create_submit_btn" style="margin: 0 20px 20px 0;" type="submit">Create</button>
