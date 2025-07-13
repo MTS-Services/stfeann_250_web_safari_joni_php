@@ -1721,6 +1721,17 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
    9. RESPONSIVE DESIGN
    ============================================================================= */
 
+/*small Screens (380) */
+@media (min-width: 380px) {
+    .home_page_product-grid {
+        padding: 10px;
+    }
+
+    .home_page_container {
+        padding: 10px;
+    }
+}
+
 /* Small Screens (640px and up) */
 @media (min-width: 640px) {
 
@@ -1728,6 +1739,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     .home_page_button-text-mobile {
         display: none;
     }
+
 
     .home_page_button-text-desktop {
         display: inline;
@@ -1876,6 +1888,14 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
         display: none;
     }
 
+    .home_page_categories-section {
+        padding: 20px;
+    }
+
+    .home_page_product-grid {
+        padding: 20px;
+    }
+
     .navbar_desktop-nav {
         display: flex;
     }
@@ -1984,7 +2004,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 
     .about-cards-left {
         width: 50%;
-        grid-template-columns: repeat(2, 1fr);
+        /* grid-template-columns: repeat(2, 1fr); */
     }
 
     .about-card-full {
