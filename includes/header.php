@@ -1,7 +1,5 @@
  
-<script>
-        
-</script>
+ 
 
  
  <section class="navbar_page-wrapper">
