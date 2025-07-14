@@ -67,7 +67,7 @@
                                 <div class="navbar_modal-buttons-inline">
                                     <a href="<?= isLoggedIn() ? '/backend.php?page=dashboard' : '/backend.php?page=dashboard' ?>
                                     " class="navbar_modal-button navbar_primary-button">
-                                       <?= isLoggedIn() ? 'Dashboard' : "Login" ?>
+                                        <?= isLoggedIn() ? 'Dashboard' : "Login" ?>
                                     </a>
                                     <a href="?page=register" class="navbar_modal-button navbar_secondary-button">Create
                                         Account</a>
