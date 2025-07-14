@@ -2,8 +2,11 @@
 require_once __DIR__ . '/../../../config/config.php';
 require_once __DIR__ . '/../../../config/function.php';
 
-
+$id = isset($_GET['id']) ? intval($_GET['id']) : null;
 $category_names = getAllCategoryNames();
+$produt_images = getAllProductImages($id);
+
+
 
 $data = [
     'name' => '',
@@ -14,10 +17,10 @@ $data = [
     'category_id' => '',
     'sort_order' => 0,
     'status' => 1,
-    'is_featured' => 0
+    'is_featured' => 0,
+    'is_primary' => 0
 ];
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : null;
 if (!empty($id)) {
     $data = getProduct($id);
 }
@@ -80,7 +83,7 @@ if (!empty($id)) {
         <div class="create_form_group">
             <label for="category_id">Category ID</label>
             <select name="category_id" id="">
-                <option value="<?= $data['id'] ?>"><?= $data['category_name'] ?></option>
+                <option value="<?= $data['category_id'] ?>"><?= $data['category_name'] ?></option>
                 <?php foreach ($category_names as $category): ?>
                     <option value="<?= $category['id'] ?>" <?= $category['name'] == $data['category_id'] ? 'selected' : '' ?>>
                         <?= $category['name'] ?>
@@ -96,12 +99,12 @@ if (!empty($id)) {
         </div>
         <div class="create_form_group">
             <label for="images">Images</label>
-            <input type="file" name="images[]" id="image" multiple required>
+            <input type="file" name="images[]" id="image" multiple>
         </div>
     </div>
     <div class="flex items-center" style="margin-left: 20px">
         <div class="custom-checkbox-container">
-            <input type="checkbox" id="is_primary" name="is_primary" value="1" class="custom-checkbox">
+            <input type="checkbox" id="is_primary" name="is_primary" value="1" class="custom-checkbox" >
             <label for="is_primary" class="custom-label">Set first uploaded image as primary</label>
         </div>
     </div>
