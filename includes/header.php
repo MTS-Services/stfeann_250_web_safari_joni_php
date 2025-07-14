@@ -1,8 +1,10 @@
+
+
 <section class="navbar_page-wrapper">
     <nav class="navbar_navbar">
         <div class="navbar_navbar-container">
             <div class="navbar_navbar-content">
-                <div class="navbar_mobile-menu-toggle-wrapper">
+                <div class="navbar_mobile-menu-toggle-wrapper" onclick="toggleMobileMenu()">
                     <button id="mobile-menu-button" class="navbar_mobile-menu-button">
                         <span class="navbar_sr-only">Open main menu</span>
                         <svg id="hamburger-icon" class="navbar_icon" xmlns="http://www.w3.org/2000/svg" fill="none"

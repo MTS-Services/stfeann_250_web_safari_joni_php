@@ -3,7 +3,7 @@
     require_once __DIR__ . '/../config/config.php';
     require_once __DIR__ . '/../config/function.php';
     $categories = getAllCategories();
-    $products = getAllProducts();
+    $products = getFeaturedProducts();
 ?>
 <section id="page">
 
@@ -26,7 +26,7 @@
                      
                     <?php foreach ($categories as $category): ?>
                         <div class="swiper-slide home_page_category-slide">
-                            <a href="?page=shop&category=<?= $category['id'] ?>" class="home_page_slide-link"></a>
+                            <a href="/../includes/category_product.php?id=<?= $category['id'] ?>" class="home_page_slide-link"></a>
                             <div class="home_page_category-image-container">
                                 <img src="../public/uploads/<?= $category['image'] ?>" alt="Fitness Wear Category" class="home_page_category-image">
                             </div>
