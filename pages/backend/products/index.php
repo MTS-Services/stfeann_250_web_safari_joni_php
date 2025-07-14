@@ -1,100 +1,58 @@
+<?php
+require_once __DIR__ . '/../../../config/config.php';
+require_once __DIR__ . '/../../../config/function.php';
+$products = getAllProducts();
+
+$id = $_GET['id'] ?? null;
+if ($id) {
+    $pdo->prepare("DELETE FROM products WHERE id = ?")->execute([$id]);
+}
+?>
 <div class="table-container">
     <table class="table">
+        <div class="table-header flex items-center justify-between">
+            <h2 class="table-title">Products List</h2>
+            <a href="backend.php?folder=products&page=create" class="btn btn-primary">Create New</a>
+        </div>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Product</th>
-                <th>Amount</th>
+                <th>Category</th>
+                <th>Price</th>
                 <th>Status</th>
-                <th>Date</th>
+                <th>Featured</th>
+                <th>Created At</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>12345</td>
-                <td>Premium Plan</td>
-                <td>$99.00</td>
-                <td><span class="status-badge success">Completed</span></td>
-                <td>2024-01-15</td>
-                <td>
-                    <div class="action-icon dropdown">
-                        <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
-                        <div class="dropdown-menu" style="display: none;">
-                            <a href="edit.php?id=<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>
-                            <a href="toggle_status.php?id=<?= $row['id'] ?>">
-                                <i class="fa fa-toggle-on"></i> Toggle Status
-                            </a>
+        <tbody></tbody>
+            <?php foreach ($products as $product) : ?>
+                <tr>
+                    <td><?= $product['id'] ?></td>
+                    <td><?= $product['name'] ?></td>
+                    <td><?= $product['category_name'] ?></td>
+                    <td><?= $product['price'] ?></td>
+                    <td style="width: 10%;"><span class="status-badge <?= $product['status'] == 1 ? 'success' : 'error' ?>"><?= $product['status'] == 1 ? 'Active' : 'Inactive' ?></span></td>
+                    <td><span class="status-badge <?= $product['is_featured'] == 1 ? 'success' : 'error' ?>"><?= $product['is_featured'] == 1 ? 'Yes' : 'No' ?></span></td>
+                    <td><?= $product['created_at'] ?></td>
+                    <td style="width: 10%;">
+                        <div class="action-icon dropdown">
+                            <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
+                            <div class="dropdown-menu" style="display: none;">
+                                <a href="/backend.php?folder=products&page=edit&id=<?= $product['id'] ?>">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
+                                <a href="../../../backend/products/toggle_status.php?id=<?= $product['id'] ?>"><i class="fa fa-toggle-on"></i><?php echo $product['status'] == 1 ? ' Inactive' : ' Active' ?></a>
+                                <a href="../../../backend/products/featured.php?id=<?= $product['id'] ?>"><i class="fa fa-toggle-on"></i><?php echo $product['is_featured'] == 1 ? ' Unset Featured' : ' Set Featured' ?></a>
+                                <a href="../../../backend/products/delete.php?id=<?= $product['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
+                                    <i class="fa fa-trash"></i> Delete
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>12346</td>
-                <td>Basic Plan</td>
-                <td>$29.00</td>
-                <td><span class="status-badge warning">Pending</span></td>
-                <td>2024-01-14</td>
-                <td>
-                    <div class="action-icon dropdown">
-                        <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
-                        <div class="dropdown-menu" style="display: none;">
-                            <a href="edit.php?id=<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>
-                            <a href="toggle_status.php?id=<?= $row['id'] ?>">
-                                <i class="fa fa-toggle-on"></i> Toggle Status
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>12347</td>
-                <td>Pro Plan</td>
-                <td>$199.00</td>
-                <td><span class="status-badge success">Completed</span></td>
-                <td>2024-01-13</td>
-                <td>
-                    <div class="action-icon dropdown">
-                        <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
-                        <div class="dropdown-menu" style="display: none;">
-                            <a href="edit.php?id=<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>
-                            <a href="toggle_status.php?id=<?= $row['id'] ?>">
-                                <i class="fa fa-toggle-on"></i> Toggle Status
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>12348</td>
-                <td>Basic Plan</td>
-                <td>$29.00</td>
-                <td><span class="status-badge error">Failed</span></td>
-                <td>2024-01-12</td>
-                <td>
-                    <div class="action-icon dropdown">
-                        <i class="fa-solid fa-gear" onclick="toggleDropdown(this)"></i>
-                        <div class="dropdown-menu" style="display: none;">
-                            <a href="edit.php?id=<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="delete.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>
-                            <a href="toggle_status.php?id=<?= $row['id'] ?>">
-                                <i class="fa fa-toggle-on"></i> Toggle Status
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

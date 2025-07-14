@@ -1,4 +1,12 @@
+
+<?php
+    require_once __DIR__ . '/../config/config.php';
+    require_once __DIR__ . '/../config/function.php';
+    $categories = getAllCategories();
+    $products = getAllProducts();
+?>
 <section id="page">
+
     <!-- Hero Section -->
     <section class="home_page_hero">
         <img src="../public/images/Foto_Principal.jpg" alt="Woman tying her shoelaces in a gym" class="home_page_hero-background-image">
@@ -15,17 +23,18 @@
         <div class="home_page_container">
             <div class="swiper home_page_categorySlider">
                 <div class="swiper-wrapper">
-                    <?php for ($i = 1; $i <= 8; $i++) : ?>
+                     
+                    <?php foreach ($categories as $category): ?>
                         <div class="swiper-slide home_page_category-slide">
-                            <a href="#" class="home_page_slide-link"></a>
+                            <a href="?page=shop&category=<?= $category['id'] ?>" class="home_page_slide-link"></a>
                             <div class="home_page_category-image-container">
-                                <img src="../public/images/f<?= $i ?>.png" alt="Fitness Wear Category" class="home_page_category-image">
+                                <img src="../public/uploads/<?= $category['image'] ?>" alt="Fitness Wear Category" class="home_page_category-image">
                             </div>
                             <div class="home_page_category-info">
-                                <p class="home_page_category-name">Yoga Gear</p>
+                                <p class="home_page_category-name"><?= $category['name'] ?></p>
                             </div>
                         </div>
-                    <?php endfor; ?>
+                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -37,16 +46,16 @@
             <h2 class="home_page_section-title">Destaques</h2>
             <p class="home_page_section-subtitle">Descubra nossa coleção premium de roupas fitness</p>
             <div class="home_page_product-grid">
-                <?php for ($i = 1; $i <= 3; $i++) : ?>
+                 <?php foreach ($products as $product) : ?>
                     <div class="home_page_product-card">
-                        <a href="#" class="home_page_card-link"></a>
+                        <a href="/?page=details&id=<?= $product['id'] ?>" class="home_page_card-link"></a>
                         <div class="home_page_product-image-container">
-                            <img src="../public/images/n<?= $i ?>.png" alt="Premium Sports Legging" class="home_page_product-image">
+                            <img src="../public/images/n1.png" alt="Premium Sports Legging" class="home_page_product-image">
                             <div class="home_page_product-image-overlay"></div>
                         </div>
                         <div class="home_page_product-info">
                             <div class="home_page_product_info_wrapper">
-                                <h3 class="home_page_product-name">Legging Esportiva Premium</h3>
+                                <h3 class="home_page_product-name"><?= $product['name'] ?></h3>
                                 <div class="home_page_product-rating">
                                     <div class="home_page_stars">
                                         ⭐⭐⭐⭐<span class="home_page_star-gray">⭐</span>
@@ -55,7 +64,7 @@
                                 </div>
                             </div>
                             <div class="home_page_product-actions">
-                                <span class="home_page_product-price">29.90€</span>
+                                <span class="home_page_product-price"><?= $product['price'] ?>€</span>
                                 <button class="home_page_add-to-cart-button">
                                     <span class="home_page_button-text-desktop">Add to Cart</span>
                                     <span class="home_page_button-text-mobile">Add</span>
@@ -63,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                <?php endfor; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
