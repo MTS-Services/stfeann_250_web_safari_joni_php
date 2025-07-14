@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../../config/config.php';
 require_once __DIR__ . '/../../../config/function.php';
 
+
 $category_names = getAllCategoryNames();
 
 $data = [
@@ -11,6 +12,9 @@ $data = [
     'description' => '',
     'price' => '',
     'category_id' => '',
+    'sort_order' => 0,
+    'status' => 1,
+    'is_featured' => 0
 ];
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -18,7 +22,7 @@ if (!empty($id)) {
     $data = getProduct($id);
 }
 ?>
-<form class="table-container" action="../../../backend/products/update.php?id=<?= $id ?>" method="POST">
+<form class="table-container" action="../../../backend/products/update.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
     <div class="table-header">
         <h2 class="table-title">Product Edit</h2>
         <a href="/backend.php?folder=products&page=index" class="create_button">Back</a>
@@ -76,9 +80,9 @@ if (!empty($id)) {
         <div class="create_form_group">
             <label for="category_id">Category ID</label>
             <select name="category_id" id="">
-                <option value=" ">Select Category</option>
+                <option value="<?= $data['id'] ?>"><?= $data['category_name'] ?></option>
                 <?php foreach ($category_names as $category): ?>
-                    <option value="<?= $category['id'] ?>" <?= $category['id'] == $data['category_id'] ? 'selected' : '' ?>>
+                    <option value="<?= $category['id'] ?>" <?= $category['name'] == $data['category_id'] ? 'selected' : '' ?>>
                         <?= $category['name'] ?>
                     </option>
                 <?php endforeach; ?>
@@ -89,6 +93,16 @@ if (!empty($id)) {
                 unset($_SESSION['category_id']);
             }
             ?>
+        </div>
+        <div class="create_form_group">
+            <label for="images">Images</label>
+            <input type="file" name="images[]" id="image" multiple required>
+        </div>
+    </div>
+    <div class="flex items-center" style="margin-left: 20px">
+        <div class="custom-checkbox-container">
+            <input type="checkbox" id="is_primary" name="is_primary" value="1" class="custom-checkbox">
+            <label for="is_primary" class="custom-label">Set first uploaded image as primary</label>
         </div>
     </div>
     <div class="flex justify-end">
