@@ -55,16 +55,16 @@
 
                     <div class="navbar_user-action">
                         <a href="<?php
-                                    if (isLoggedIn()) {
-                                        if ($_SESSION['is_admin'] == 1) {
-                                            echo '/backend.php?page=dashboard';
-                                        } else {
-                                            echo '?page=profile';
-                                        }
-                                    } else {
-                                        echo '?page=login';
-                                    }
-                                    ?>" class="navbar_user-button">
+                        if (isLoggedIn()) {
+                            if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+                                echo '/backend.php?page=dashboard';
+                            } else {
+                                echo '/?page=profile';
+                            }
+                        } else {
+                            echo '?page=login';
+                        }
+                        ?>" class="navbar_user-button">
                             <svg class="navbar_icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
