@@ -6,8 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = sanitizeInput($_POST['email']);
     $password = $_POST['password'];
     $confirm_password = $_POST['password_confirmation'];
-    // var_dump($name);
-    // die();
 
     
     // Validation
