@@ -141,4 +141,55 @@ function getCategoryProducts($category_id)
     $stmt->execute([$category_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
- 
+
+
+
+/**
+ * Fetch a page of products with their category name.
+ *
+ * @param int  $perPage  How many products per page (default 10)
+ * @return array         The queried rows as associative arrays
+ */
+function getPaginatedProducts(int $perPage = 10): array
+{
+    global $pdo;
+
+    // Current page from the query‑string, fallback to 1
+    $currentPage = isset($_GET['paginate']) && is_numeric($_GET['paginate'])
+        ? (int) $_GET['paginate']
+        : 1;
+
+    // Calculate the first row for this page (OFFSET)
+    $offset = ($currentPage - 1) * $perPage;
+
+    $sql = "
+        SELECT  products.*,
+                categories.name AS category_name
+        FROM    products 
+        LEFT JOIN categories ON products.category_id = categories.id
+        ORDER BY products.sort_order ASC
+        LIMIT   :limit
+        OFFSET  :offset
+    ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':limit', $perPage, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Count total products (for page‑count calculation).
+ *
+ * @return int  Total number of rows in `products`
+ */
+function getTotalProductCount(): int
+{
+    global $pdo;
+
+    // No need to join here; COUNT(*) on products is enough
+    $stmt = $pdo->query("SELECT COUNT(*) FROM products");
+    return (int) $stmt->fetchColumn();
+}

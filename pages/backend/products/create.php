@@ -72,7 +72,7 @@ if (!empty($id)) {
 
         <div class="create_form_group">
             <label for="images">Images</label>
-            <input type="file" name="images[]" id="image" multiple required>
+            <input type="file" accept="image/*" name="images[]" id="image" multiple required>
         </div>
 
         <div class="create_form_group">
