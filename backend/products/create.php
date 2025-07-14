@@ -30,7 +30,6 @@ try {
     $description = trim($_POST['description']);
     $price = floatval($_POST['price']);
     $category_id = intval($_POST['category_id']);
-    $is_primary_set = isset($_POST['is_primary']) ? 1 : 0;
 
     // Verify category exists
     $stmt = $pdo->prepare("SELECT id FROM categories WHERE id = ?");
@@ -68,7 +67,7 @@ try {
 
             if (move_uploaded_file($tmp_name, $destination)) {
                 $sort_order = $uploaded_count;
-                $is_primary = ($uploaded_count === 0 && $is_primary_set) ? 1 : 0;
+                $is_primary = $key === 0 ? 1 : 0;
 
                 $stmt = $pdo->prepare("INSERT INTO product_images (product_id, image, sort_order, is_primary, created_at, created_by)
                                        VALUES (?, ?, ?, ?, NOW(), 1)");

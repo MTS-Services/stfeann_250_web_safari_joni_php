@@ -71,8 +71,8 @@ if (!empty($id)) {
         </div>
 
         <div class="create_form_group">
-            <label for="description">Description</label>
-            <textarea name="description" id="description"><?= $data['description'] ?></textarea>
+            <label for="images">Images</label>
+            <input type="file" name="images[]" id="image" multiple required>
         </div>
 
         <div class="create_form_group">
@@ -92,17 +92,19 @@ if (!empty($id)) {
             }
             ?>
         </div>
+
         <div class="create_form_group">
-            <label for="images">Images</label>
-            <input type="file" name="images[]" id="image" multiple required>
+            <label for="description">Description</label>
+            <textarea name="description" id="description"><?= $data['description'] ?></textarea>
         </div>
+
     </div>
-    <div class="flex items-center" style="margin-left: 20px">
+    <!-- <div class="flex items-center" style="margin-left: 20px">
         <div class="custom-checkbox-container">
             <input type="checkbox" id="is_primary" name="is_primary" value="1" class="custom-checkbox">
             <label for="is_primary" class="custom-label">Set first uploaded image as primary</label>
         </div>
-    </div>
+    </div> -->
     <div class="flex justify-end">
         <button class="create_submit_btn" style="margin: 0 20px 20px 0;" type="submit">Create</button>
     </div>
