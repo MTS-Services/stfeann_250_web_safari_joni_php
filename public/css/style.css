@@ -863,7 +863,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 }
 
 .about-description-text-side {
-     width: 100%;
+    width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 2rem;
@@ -883,7 +883,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 }
 
 .about-description-image-side {
-     width: 100%;
+    width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -2472,6 +2472,11 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
         font-size: 1.5rem;
     }
 
+    .navbar_icon {
+        width: 1.5rem;
+        height: 15px;
+    }
+
     .navbar_logo-container {
         flex-shrink: 0;
         padding-left: 145px;
@@ -3083,10 +3088,12 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     transition: all 0.3s ease;
     text-decoration: none;
 }
+
 .logout-edit-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
+
 .edit-button {
     display: inline-block;
     padding: 14px 35px;
@@ -3131,6 +3138,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     justify-content: space-between;
     align-items: center;
 }
+
 .edit-button-wrapper a {
     text-decoration: none;
     padding: 10px 20px;
