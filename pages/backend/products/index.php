@@ -2,11 +2,6 @@
 require_once __DIR__ . '/../../../config/config.php';
 require_once __DIR__ . '/../../../config/function.php';
 $products = getAllProducts();
-
-$id = $_GET['id'] ?? null;
-if ($id) {
-    $pdo->prepare("DELETE FROM products WHERE id = ?")->execute([$id]);
-}
 ?>
 <div class="table-container">
     <table class="table">
