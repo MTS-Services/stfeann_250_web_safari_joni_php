@@ -115,3 +115,16 @@ function getSearchProducts(string $searchValue): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getCategoryProducts($category_id)
+{
+    global $pdo;
+    $stmt = $pdo->prepare("
+        SELECT products.*, categories.name AS category_name
+        FROM products
+        LEFT JOIN categories ON products.category_id = categories.id
+        WHERE products.category_id = ?
+    ");
+    $stmt->execute([$category_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
