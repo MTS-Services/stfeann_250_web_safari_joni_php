@@ -1027,7 +1027,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 
 /* Shop Products Container */
 .shop-products-container {
-    max-width: 1280px;
+    max-width: 1700px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1rem;
@@ -2556,7 +2556,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 /* 📱------------------------------------------------------------------------- details page ------------------------------------------------------------*/
 
 #detail {
-    margin-top: 70px;
+    margin-top: 70rem;
 }
 
 /* Container for details page */

@@ -17,12 +17,6 @@ function getCategory($id)
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-// function getAllCategoryNames()
-// {
-//     global $pdo;
-//     $stmt = $pdo->query("SELECT name FROM categories ORDER BY sort_order ASC");
-//     return $stmt->fetchAll(PDO::FETCH_COLUMN);
-// }
 function getAllCategoryNames()
 {
     global $pdo;
@@ -53,7 +47,30 @@ function getAllProducts()
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getAllProductImages($product_id)
+{
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id = ?");
+    $stmt->execute([$product_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
+function getFeaturedProducts()
+{
+    global $pdo;
+
+    $stmt = $pdo->query("
+        SELECT 
+            products.*, 
+            categories.name AS category_name
+        FROM products
+        LEFT JOIN categories ON products.category_id = categories.id
+        WHERE products.is_featured = 1
+        ORDER BY products.sort_order ASC
+    ");
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 // function getProduct($id)
 // {
 //     global $pdo;
@@ -73,22 +90,6 @@ function getProduct($id)
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
-
-function getAllUsers()
-{
-    $pdo = getDBConnection(); // Safe & proper connection
-    $stmt = $pdo->query("SELECT * FROM users ORDER BY sort_order ASC");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-function getUser($id)
-{
-    $pdo = getDBConnection(); // Safe & proper connection
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
 function getSearchProducts(string $searchValue): array
 {
     global $pdo;
@@ -115,6 +116,19 @@ function getSearchProducts(string $searchValue): array
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getAllUsers()
+{
+    $pdo = getDBConnection(); // Safe & proper connection
+    $stmt = $pdo->query("SELECT * FROM users ORDER BY sort_order ASC");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+function getUser($id)
+{
+    $pdo = getDBConnection(); // Safe & proper connection
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 function getCategoryProducts($category_id)
 {
     global $pdo;
@@ -127,4 +141,4 @@ function getCategoryProducts($category_id)
     $stmt->execute([$category_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+ 
