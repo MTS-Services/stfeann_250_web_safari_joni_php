@@ -20,15 +20,10 @@
             <div class="about-description-container">
                 <div class="about-description-text-side">
                     <h1 class="about-description-title">
-                        Nossa História e Compromisso
+                        Tudo começou com uma ideia simples durante um treino
                     </h1>
                     <p class="about-description-text">
-                        Fundada em 2010, a Valgrit nasceu com a visão de unir paixão por esportes e estilo de vida
-                        saudável. Começamos pequenos, com o objetivo de oferecer produtos de alta qualidade que
-                        realmente fizessem a diferença na vida dos nossos clientes. Ao longo dos anos, crescemos e nos
-                        tornamos uma referência em roupas e suplementos, sempre mantendo nosso compromisso com a
-                        excelência e a inovação. Acreditamos que cada pessoa merece as melhores ferramentas para atingir
-                        seu potencial máximo, seja na academia, na pista ou no dia a dia.
+                      Depois de anos a frequentar o ginásio diariamente, percebemos que faltava algo no mercado: roupa que fosse realmente pensada para quem leva o treino a sério — que combinasse conforto, estilo, durabilidade e que também representasse a mentalidade de quem vive este estilo de vida.A ideia surgiu entre conversas no pós-treino, com o corpo cansado mas a mente cheia de energia:"E se criássemos uma marca que realmente entendesse a linguagem do ginásio?"Não queríamos apenas mais uma marca. Queríamos construir algo com identidade, com propósito, com garra.Começámos com esboços simples, a testar tecidos, a falar com pequenas oficinas de produção, a errar e a ajustar.
                     </p>
                 </div>
                 <div class="about-description-image-side">
@@ -42,30 +37,21 @@
                     <div class="about-card">
                         <h2 class="about-card-title">A Nossa Missão</h2>
                         <p class="about-card-text">
-                            Nossa missão é inspirar e capacitar indivíduos a viverem uma vida ativa e saudável,
-                            fornecendo roupas e suplementos de alta qualidade que combinam desempenho, conforto e
-                            estilo. Queremos ser mais do que uma marca, queremos ser um parceiro na sua jornada de
-                            bem-estar.
+                          Queremos inspirar uma comunidade de pessoas que valorizam o esforço, a disciplina e a superação. Acreditamos que o que vestes pode ser uma extensão da tua mentalidade — e que o teu compromisso contigo mesmo merece roupa à altura
                         </p>
                     </div>
                     <div class="about-card">
                         <h2 class="about-card-title">Produção com Propósito</h2>
                         <p class="about-card-text">
-                            Na Valgrit, cada peça de roupa e cada suplemento é desenvolvido com um propósito claro:
-                            otimizar seu desempenho e bem-estar. Utilizamos materiais inovadores e fórmulas eficazes,
-                            fruto de muita pesquisa e testes rigorosos, para garantir que você receba sempre o melhor.
+                          Cada peça é produzida com cuidado, em quantidades controladas, para garantir qualidade, durabilidade e menor desperdício. Trabalhamos com fábricas locais que seguem padrões éticos de produção, respeitando quem faz e quem usa
                         </p>
                     </div>
                 </div>
 
                 <div class="about-card-full">
-                    <h2 class="about-card-full-title">Compromisso Sustentável</h2>
+                    
                     <p class="about-card-full-text">
-                        Temos um forte compromisso com a sustentabilidade. Buscamos constantemente formas de minimizar
-                        nosso impacto ambiental, desde a escolha de matérias-primas ecologicamente corretas até
-                        processos de produção que reduzem o desperdício. Acreditamos que cuidar do nosso corpo também
-                        significa cuidar do nosso planeta. Por isso, investimos em embalagens recicladas e na redução da
-                        nossa pegada de carbono em toda a cadeia de produção.
+                       Valorizamos a produção consciente e estamos constantemente a procurar materiais e soluções mais sustentáveis, sem comprometer a performance.Esta marca é para quem vive com garra. Para quem entende que o verdadeiro progresso vem da consistência.Bem-vindo à nossa história — e obrigado por fazer parte dela.
                     </p>
                 </div>
             </div>
