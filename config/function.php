@@ -88,3 +88,30 @@ function getUser($id)
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function getSearchProducts(string $searchValue): array
+{
+    global $pdo;
+
+
+    $searchValue = sanitizeInput($searchValue);
+    if (empty($searchValue)) {
+        return []; // Return empty array if search value is empty
+    }
+    // Wrap term in wildcards without extra spaces
+    $like = "%{$searchValue}%";
+
+    $sql = "
+        SELECT products.*, categories.name AS category_name
+        FROM products
+        LEFT JOIN categories ON products.category_id = categories.id
+        WHERE products.name        LIKE :like
+           OR products.description LIKE :like
+    ";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['like' => $like]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
