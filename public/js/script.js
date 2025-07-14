@@ -234,3 +234,13 @@ function toggleMobileMenu() {
   const mobileMenu = document.getElementById('mobile-menu');
   mobileMenu.classList.toggle('navbar_hidden');
 }
+
+
+
+
+const searchIcon = document.getElementById('search-icon');
+const searchBox = document.getElementById('search-input-group');
+
+searchIcon.addEventListener('click', () => {
+  searchBox.classList.toggle('active');
+});
