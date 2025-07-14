@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 // login page script
-document.querySelectorAll('.pagination-link').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector('.current-page')?.classList.remove('current-page');
-    this.classList.add('current-page');
-  });
-});
+// document.querySelectorAll('.pagination-link').forEach(link => {
+//   link.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     document.querySelector('.current-page')?.classList.remove('current-page');
+//     this.classList.add('current-page');
+//   });
+// });
 document.addEventListener("DOMContentLoaded", () => {
   const openUserModalBtn = document.getElementById("open-user-modal-button");
   const closeUserModalBtn = document.getElementById("close-user-modal-button");
