@@ -863,8 +863,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 }
 
 .about-description-text-side {
-    width: 100%;
-    height: 300px;
+     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 2rem;
@@ -884,8 +883,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 }
 
 .about-description-image-side {
-    width: 100%;
-    height: 300px;
+     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
 }
