@@ -3,9 +3,10 @@ require_once __DIR__ . '/../../config/config.php';
 
 try {
     $pdo = getDBConnection();
+    $pdo->beginTransaction();
 
     // Basic validation
-    $requiredFields = ['name', 'slug', 'price', 'category_id'];
+    $requiredFields = ['name', 'slug', 'price', 'category_id','stock_no'];
     $hasError = false;
 
     foreach ($requiredFields as $field) {
@@ -22,57 +23,78 @@ try {
         exit;
     }
 
-    // $requiredFields = ['name', 'slug', 'price', 'category_id'];
-    // foreach ($requiredFields as $field) {
-    //     $_SESSION[$field] = 'Please fill in all fields';
-    //     if (empty($_POST[$field])) {
-    //         header('Location: ../../backend.php?folder=products&page=create');
-    //     }
-    // }
-
-    // Sanitize and assign values
+    // Sanitize values
     $name = trim($_POST['name']);
     $slug = trim($_POST['slug']);
     $stock_no = trim($_POST['stock_no']);
     $description = trim($_POST['description']);
     $price = floatval($_POST['price']);
     $category_id = intval($_POST['category_id']);
+    $is_primary_set = isset($_POST['is_primary']) ? 1 : 0;
 
-    // Check that category exists
-    $checkCat = $pdo->prepare("SELECT id FROM categories WHERE id = ?");
-    $checkCat->execute([$category_id]);
-    if (!$checkCat->fetch()) {
-        $_SESSION['category_id'] = 'Category does not exist';
+    // Verify category exists
+    $stmt = $pdo->prepare("SELECT id FROM categories WHERE id = ?");
+    $stmt->execute([$category_id]);
+    if (!$stmt->fetch()) {
+        $_SESSION['category_id'] = 'Invalid category';
         header('Location: ../../backend.php?folder=products&page=create');
+        exit;
     }
 
-    // Prepare and execute insert
-    $stmt = $pdo->prepare("INSERT INTO products 
-        (name, slug, stock_no, description, price, category_id, created_at, created_by) 
-        VALUES (?, ?, ?, ?, ?, ?, NOW(), 1)");
+    // Insert product
+    $stmt = $pdo->prepare("INSERT INTO products (name, slug, stock_no, description, price, category_id, created_at, created_by)
+                           VALUES (?, ?, ?, ?, ?, ?, NOW(), 1)");
+    $stmt->execute([$name, $slug, $stock_no, $description, $price, $category_id]);
 
-    $success = $stmt->execute([
-        $name,
-        $slug,
-        $stock_no,
-        $description,
-        $price,
-        $category_id
-    ]);
+    // Get inserted product ID
+    $product_id = $pdo->lastInsertId();
 
-    if (!$success) {
-        $_SESSION['error'] = 'Failed to create product';
-        header('Location: ../../backend.php?folder=products&page=create');
+    // Handle images
+    $errors = [];
+    $uploaded_count = 0;
+    $upload_dir = __DIR__ . "/../../uploads/products/";
+
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
     }
 
-    // Redirect to product list
+    if (!empty($_FILES['images']['name']) && is_array($_FILES['images']['name'])) {
+        foreach ($_FILES['images']['name'] as $key => $imgName) {
+            if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK) continue;
+
+            $tmp_name = $_FILES['images']['tmp_name'][$key];
+            $new_file = time() . '_' . basename($imgName);
+            $destination = $upload_dir . $new_file;
+
+            if (move_uploaded_file($tmp_name, $destination)) {
+                $sort_order = $uploaded_count;
+                $is_primary = ($uploaded_count === 0 && $is_primary_set) ? 1 : 0;
+
+                $stmt = $pdo->prepare("INSERT INTO product_images (product_id, image, sort_order, is_primary, created_at, created_by)
+                                       VALUES (?, ?, ?, ?, NOW(), 1)");
+                if ($stmt->execute([$product_id, $new_file, $sort_order, $is_primary])) {
+                    $uploaded_count++;
+                } else {
+                    $errors[] = "Image DB insert failed: $imgName";
+                    unlink($destination);
+                }
+            } else {
+                $errors[] = "Failed to upload: $imgName";
+            }
+        }
+    }
+
+    $pdo->commit();
+
+    if (!empty($errors)) {
+        $_SESSION['image_errors'] = $errors;
+    }
+
     header('Location: ../../backend.php?folder=products&page=index');
     exit;
-
 } catch (Exception $e) {
-    // Output the error (you can replace with session-based flash messages or logging)
-    echo "<h3>Error:</h3>";
-    echo "<p>" . htmlspecialchars($e->getMessage()) . "</p>";
-    echo '<a href="javascript:history.back()">Go Back</a>';
+    $pdo->rollBack();
+    echo "<h3>Something went wrong!</h3>";
+    echo "<p>" . $e->getMessage() . "</p>";
     exit;
 }

@@ -20,7 +20,7 @@ if (!empty($id)) {
     $data = getProduct($id);
 }
 ?>
-<form class="table-container" action="../../../backend/products/create.php" method="POST">
+<form class="table-container" action="../../../backend/products/create.php" method="POST" enctype="multipart/form-data">
     <div class="table-header">
         <h2 class="table-title">Product Create</h2>
         <a href="/backend.php?folder=products&page=index" class="create_button">Back</a>
@@ -91,6 +91,16 @@ if (!empty($id)) {
                 unset($_SESSION['category_id']);
             }
             ?>
+        </div>
+        <div class="create_form_group">
+            <label for="images">Images</label>
+            <input type="file" name="images[]" id="image" multiple required>
+        </div>
+    </div>
+    <div class="flex items-center" style="margin-left: 20px">
+        <div class="custom-checkbox-container">
+            <input type="checkbox" id="is_primary" name="is_primary" value="1" class="custom-checkbox">
+            <label for="is_primary" class="custom-label">Set first uploaded image as primary</label>
         </div>
     </div>
     <div class="flex justify-end">

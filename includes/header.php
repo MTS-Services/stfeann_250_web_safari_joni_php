@@ -65,7 +65,7 @@
                             <div class="navbar_modal-content">
                                 <h3>Welcome!</h3>
                                 <div class="navbar_modal-buttons-inline">
-                                    <a href="<?= isLoggedIn() ? '/backend.php?page=dashboard' : '/backend.php?page=dashboard' ?>
+                                    <a href="<?= isLoggedIn() ? '/backend.php?page=dashboard' : '?page=login' ?>
                                     " class="navbar_modal-button navbar_primary-button">
                                        <?= isLoggedIn() ? 'Dashboard' : "Login" ?>
                                     </a>
