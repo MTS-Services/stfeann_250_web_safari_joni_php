@@ -40,8 +40,9 @@ $currentPage = isset($_GET['paginate']) && is_numeric($_GET['paginate'])
                             <a class="product-card-link" href="?page=details&id=<?= $product['id'] ?>"
                                 aria-label="View Product <?= $product['name'] ?> details"></a>
                             <div class="product-card-image-wrapper">
-                                <img src="../public/images/n1.png" alt="<?= $product['name'] ?>" class="product-card-image"
-                                    loading="lazy" width="340" height="340">
+                                <img src="/public/uploads/products/<?= $product['product_image'] ?>"
+                                    alt="<?= $product['name'] ?>" class="product-card-image" loading="lazy" width="340"
+                                    height="340">
                                 <div class="product-card-image-overlay"></div>
                             </div>
                             <div class="product-card-content">

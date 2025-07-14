@@ -163,17 +163,17 @@ $products = getSearchProducts($searchValue);
     .search_page_product-grid {
       grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
     }
-    
+
     .search_page_product-card {
       flex-direction: row;
       height: 280px;
     }
-    
+
     .search_page_product-image {
       width: 40%;
       height: 100%;
     }
-    
+
     .search_page_product-content {
       width: 60%;
     }
@@ -184,9 +184,11 @@ $products = getSearchProducts($searchValue);
     .search_page_title {
       font-size: 2rem;
     }
+
     .search_page_product-card {
       flex-direction: row;
     }
+
     .search_page_product-grid {
       grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     }
@@ -198,11 +200,11 @@ $products = getSearchProducts($searchValue);
       font-size: 1.75rem;
       padding: 1.5rem 0;
     }
-    
+
     .search_page_product-image {
       height: 220px;
     }
-    
+
     .search_page_product-content {
       padding: 1.25rem;
     }
@@ -214,38 +216,38 @@ $products = getSearchProducts($searchValue);
       margin: 2rem 0;
       padding: 1rem 0.5rem;
     }
-    
+
     .search_page_title {
       font-size: 1.5rem;
       padding: 1rem 0;
     }
-    
+
     .search_page_product-grid {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
-    
+
     .search_page_product-image {
       height: 200px;
     }
-    
+
     .search_page_product-content {
       padding: 1rem;
     }
-    
+
     .search_page_product-title {
       font-size: 1.1rem;
     }
-    
+
     .search_page_product-description {
       font-size: 0.8125rem;
       -webkit-line-clamp: 2;
     }
-    
+
     .search_page_product-price {
       font-size: 1.1rem;
     }
-    
+
     .search_page_view-button {
       padding: 0.4rem 0.8rem;
       font-size: 0.8125rem;
@@ -257,13 +259,13 @@ $products = getSearchProducts($searchValue);
     .search_page_product-image {
       height: 180px;
     }
-    
+
     .search_page_product-footer {
       flex-direction: column;
       align-items: flex-start;
       gap: 0.75rem;
     }
-    
+
     .search_page_view-button {
       width: 100%;
       justify-content: center;
@@ -284,22 +286,36 @@ $products = getSearchProducts($searchValue);
           <a href="details.php?id=<?= $product['id'] ?>" class="search_page_product-link">
             <div class="search_page_product-card">
               <div class="search_page_product-image">
-                <img src="../public/images/n1.png" alt="<?= htmlspecialchars($product['name']) ?>">
+                <img src="/public/uploads/products/<?= $product['product_image'] ?>"
+                  alt="<?= htmlspecialchars($product['name']) ?>">
               </div>
 
               <div class="search_page_product-content">
                 <div>
                   <div class="search_page_product-title"><?= htmlspecialchars($product['name']) ?></div>
                   <div class="search_page_stars">
-                    <?php for($i=0; $i<4; $i++): ?>
-                      <svg viewBox="0 0 20 20"><polygon points="10,1 12.59,7.36 19.51,7.36 13.97,11.63 16.56,17.99 10,13.72 3.44,17.99 6.03,11.63 0.49,7.36 7.41,7.36"/></svg>
+                    <?php for ($i = 0; $i < 4; $i++): ?>
+                      <svg viewBox="0 0 20 20">
+                        <polygon
+                          points="10,1 12.59,7.36 19.51,7.36 13.97,11.63 16.56,17.99 10,13.72 3.44,17.99 6.03,11.63 0.49,7.36 7.41,7.36" />
+                      </svg>
                     <?php endfor; ?>
-                    <svg class="search_page_gray" viewBox="0 0 20 20"><polygon points="10,1 12.59,7.36 19.51,7.36 13.97,11.63 16.56,17.99 10,13.72 3.44,17.99 6.03,11.63 0.49,7.36 7.41,7.36"/></svg>
+                    <svg class="search_page_gray" viewBox="0 0 20 20">
+                      <polygon
+                        points="10,1 12.59,7.36 19.51,7.36 13.97,11.63 16.56,17.99 10,13.72 3.44,17.99 6.03,11.63 0.49,7.36 7.41,7.36" />
+                    </svg>
                     <span style="font-size: 0.75rem; color: #6b7280; margin-left: 4px;">(4.0)</span>
                   </div>
                 </div>
 
-                <p class="search_page_product-description">Descrição do ProdutoCriado para quem dá tudo em cada treino, este modelo combina performance, conforto e estilo num só.Fabricado com materiais respiráveis e de secagem rápida, adapta-se aos movimentos do teu corpo e mantém-te focado, mesmo nas sessões mais intensas. A costura reforçada e o corte ergonómico garantem liberdade total de movimentos — sem distrações, sem limitações.Ideal para treino de força, cardio ou uso no dia a dia. Porque quem vive com disciplina merece roupa à altura da sua dedicação.Porque vestir-se bem também é parte do mindset.Destaques:Tecido técnico com elasticidade e respirabilidadeSecagem rápidaCorte atlético e confortávelCosturas reforçadas para maior durabilidadeProduzido localmente com atenção ao detalhe</p>
+                <p class="search_page_product-description">Descrição do ProdutoCriado para quem dá tudo em cada treino, este
+                  modelo combina performance, conforto e estilo num só.Fabricado com materiais respiráveis e de secagem
+                  rápida, adapta-se aos movimentos do teu corpo e mantém-te focado, mesmo nas sessões mais intensas. A
+                  costura reforçada e o corte ergonómico garantem liberdade total de movimentos — sem distrações, sem
+                  limitações.Ideal para treino de força, cardio ou uso no dia a dia. Porque quem vive com disciplina merece
+                  roupa à altura da sua dedicação.Porque vestir-se bem também é parte do mindset.Destaques:Tecido técnico
+                  com elasticidade e respirabilidadeSecagem rápidaCorte atlético e confortávelCosturas reforçadas para maior
+                  durabilidadeProduzido localmente com atenção ao detalhe</p>
 
                 <div class="search_page_product-footer">
                   <div class="search_page_product-price"><?= $product['price'] ?>€</div>
