@@ -21,21 +21,17 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a  href="backend.php?folder=categories&page=index" class="nav-link <?= $folder === 'categories' ? 'active' : '' ?>">
+                <a href="backend.php?folder=categories&page=index"
+                    class="nav-link <?= $folder === 'categories' ? 'active' : '' ?>">
                     <span><i class="fas fa-tachometer-alt"></i></span>
                     <span>Categories</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="backend.php?folder=products&page=index" class="nav-link <?= $folder === 'products' ? 'active' : '' ?>">
+                <a href="backend.php?folder=products&page=index"
+                    class="nav-link <?= $folder === 'products' ? 'active' : '' ?>">
                     <span><i class="fas fa-tachometer-alt"></i></span>
                     <span>Products</span>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a href="backend.php?folder=products&page=images" class="nav-link <?= $page === 'iamges' ? 'active' : '' ?>">
-                    <span><i class="fas fa-tachometer-alt"></i></span>
-                    <span>Images</span>
                 </a>
             </li>
         </ul>

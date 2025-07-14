@@ -35,19 +35,30 @@ function getAllProducts()
 {
     global $pdo;
 
-    $stmt = $pdo->query("
-        SELECT 
-            products.*, 
-            categories.name AS category_name
-        FROM products
-        LEFT JOIN categories ON products.category_id = categories.id
-        ORDER BY products.sort_order ASC
-    ");
+    // $stmt = $pdo->query("
+    //     SELECT 
+    //         products.*, 
+    //         categories.name AS category_name
+    //     FROM products
+    //     LEFT JOIN categories ON products.category_id = categories.id
+    //     ORDER BY products.sort_order ASC
+    // ");
+    $stmt = $pdo->query(" 
+    SELECT 
+        products.*, 
+        categories.name AS category_name,
+        product_images.image AS product_image
+    FROM products
+    LEFT JOIN categories ON products.category_id = categories.id
+    LEFT JOIN product_images ON product_images.product_id = products.id AND product_images.is_primary = 1
+    ORDER BY products.updated_at DESC
+");
+
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getAllProductImages($product_id)
+function getProductImages($product_id)
 {
     global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id = ?");
@@ -61,12 +72,14 @@ function getFeaturedProducts()
 
     $stmt = $pdo->query("
         SELECT 
-            products.*, 
-            categories.name AS category_name
+        products.*, 
+        categories.name AS category_name,
+        product_images.image AS product_image
         FROM products
         LEFT JOIN categories ON products.category_id = categories.id
+        LEFT JOIN product_images ON product_images.product_id = products.id AND product_images.is_primary = 1
         WHERE products.is_featured = 1
-        ORDER BY products.sort_order ASC
+        ORDER BY products.updated_at ASC
     ");
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -82,9 +95,13 @@ function getProduct($id)
 {
     global $pdo;
     $stmt = $pdo->prepare("
-        SELECT products.*, categories.name AS category_name 
-        FROM products 
-        LEFT JOIN categories ON products.category_id = categories.id 
+        SELECT 
+        products.*, 
+        categories.name AS category_name,
+        product_images.image AS product_image
+        FROM products
+        LEFT JOIN categories ON products.category_id = categories.id
+        LEFT JOIN product_images ON product_images.product_id = products.id AND product_images.is_primary = 1
         WHERE products.id = ?
     ");
     $stmt->execute([$id]);
@@ -103,11 +120,16 @@ function getSearchProducts(string $searchValue): array
     $like = "%{$searchValue}%";
 
     $sql = "
-        SELECT products.*, categories.name AS category_name
+        SELECT 
+        products.*, 
+        categories.name AS category_name,
+        product_images.image AS product_image
         FROM products
         LEFT JOIN categories ON products.category_id = categories.id
+        LEFT JOIN product_images ON product_images.product_id = products.id AND product_images.is_primary = 1
         WHERE products.name        LIKE :like
            OR products.description LIKE :like
+           ORDER BY products.updated_at ASC
     ";
 
     $stmt = $pdo->prepare($sql);

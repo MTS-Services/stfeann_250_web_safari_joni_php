@@ -1,3 +1,22 @@
+ :root {
+     --primary-color: #2563eb;
+     --primary-hover: #1d4ed8;
+     --secondary-color: #64748b;
+     --success-color: #10b981;
+     --warning-color: #f59e0b;
+     --danger-color: #ef4444;
+     --background-color: #f8fafc;
+     --card-background: #ffffff;
+     --text-primary: #1e293b;
+     --text-secondary: #64748b;
+     --border-color: #e2e8f0;
+     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+     --radius: 12px;
+     --radius-sm: 8px;
+ }
+
  * {
      margin: 0;
      padding: 0;
@@ -1133,3 +1152,312 @@
  .back-link:hover {
      text-decoration: underline;
  }
+
+
+ /* ####################################
+ ######### Reuseable CSS End #########
+ #################################### */
+
+
+ /* ####################################
+ ######### Product Details CSS Start #########
+ #################################### */
+ 
+ .content {
+     padding: 40px;
+     background-color: #ffffff;
+     padding: 30px;
+     border-radius: 12px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+ }
+
+ .product-main {
+     display: grid;
+     grid-template-columns: 1fr 1.2fr;
+     gap: 50px;
+     margin-bottom: 50px;
+ }
+
+ 
+
+ .primary-image {
+     border-radius: var(--radius);
+     overflow: hidden;
+     box-shadow: var(--shadow-md);
+     transition: transform 0.3s ease;
+ }
+
+ .primary-image img {
+     width: 100%;
+     max-height: 400px;
+     object-fit: cover;
+     display: block;
+     transition: all ease 0.3s;
+ }
+ .primary-image:hover img {
+     transform: scale(1.02);
+ }
+
+
+ .image-overlay {
+     position: absolute;
+     top: 15px;
+     right: 15px;
+     display: flex;
+     gap: 10px;
+ }
+
+
+ .details-section {
+     display: flex;
+     flex-direction: column;
+     gap: 30px;
+ }
+
+ .price-section {
+     background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+     padding: 25px;
+     border-radius: var(--radius);
+     border-left: 4px solid var(--primary-color);
+ }
+
+ .price {
+     font-size: 2.5rem;
+     font-weight: 700;
+     color: var(--primary-color);
+     margin-bottom: 5px;
+ }
+
+ .price-label {
+     color: var(--text-secondary);
+     font-size: 0.9rem;
+ }
+
+ .status-badges {
+     display: flex;
+     gap: 12px;
+     flex-wrap: wrap;
+ }
+
+ .badge {
+     padding: 8px 16px;
+     border-radius: 20px;
+     font-size: 0.85rem;
+     font-weight: 500;
+     display: flex;
+     align-items: center;
+     gap: 6px;
+ }
+
+ .badge.active {
+     background: #dcfce7;
+     color: #166534;
+ }
+
+ .badge.featured {
+     background: #fef3c7;
+     color: #92400e;
+ }
+
+ .info-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     gap: 20px;
+ }
+
+ .info-card {
+     background: #f8fafc;
+     padding: 20px;
+     border-radius: var(--radius-sm);
+     border: 1px solid var(--border-color);
+     transition: all 0.3s ease;
+ }
+
+ .info-card:hover {
+     background: #f1f5f9;
+     transform: translateY(-2px);
+     box-shadow: var(--shadow-md);
+ }
+
+ .info-label {
+     font-size: 0.85rem;
+     color: var(--text-secondary);
+     font-weight: 500;
+     margin-bottom: 8px;
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+ }
+
+ .info-value {
+     font-size: 1rem;
+     color: var(--text-primary);
+     font-weight: 500;
+ }
+
+ .gallery-section {
+     margin-top: 50px;
+ }
+
+ .section-title {
+     font-size: 1.8rem;
+     font-weight: 600;
+     color: var(--text-primary);
+     margin-bottom: 25px;
+     display: flex;
+     align-items: center;
+     gap: 12px;
+ }
+
+ .section-title::before {
+     content: '';
+     width: 4px;
+     height: 30px;
+     background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+     border-radius: 2px;
+ }
+
+ .gallery-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+     gap: 20px;
+ }
+
+ .gallery-item {
+     position: relative;
+     border-radius: var(--radius-sm);
+     overflow: hidden;
+     box-shadow: var(--shadow-sm);
+     transition: all 0.3s ease;
+     cursor: pointer;
+ }
+
+ .gallery-item:hover {
+     transform: translateY(-5px);
+     box-shadow: var(--shadow-md);
+ }
+
+ .gallery-item img {
+     width: 100%;
+     height: 180px;
+     object-fit: cover;
+     display: block;
+ }
+
+ .gallery-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background: rgba(0, 0, 0, 0.7);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     opacity: 0;
+     transition: opacity 0.3s ease;
+ }
+
+ .gallery-item:hover .gallery-overlay {
+     opacity: 1;
+ }
+
+ .gallery-overlay i {
+     color: white;
+     font-size: 1.5rem;
+ }
+
+ .action-buttons {
+     display: flex;
+     gap: 15px;
+     margin-top: 30px;
+ }
+
+ .btn {
+     padding: 12px 24px;
+     border: none;
+     border-radius: var(--radius-sm);
+     font-weight: 500;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     text-decoration: none;
+     font-size: 0.95rem;
+ }
+
+ .btn-primary {
+     background: var(--primary-color);
+     color: white;
+ }
+
+ .btn-primary:hover {
+     background: var(--primary-hover);
+     transform: translateY(-2px);
+     box-shadow: var(--shadow-md);
+ }
+
+ .btn-secondary {
+     background: transparent;
+     color: var(--text-primary);
+     border: 2px solid var(--border-color);
+ }
+
+ .btn-secondary:hover {
+     background: var(--background-color);
+     border-color: var(--primary-color);
+     color: var(--primary-color);
+ }
+
+ /* Responsive Design */
+ @media (max-width: 768px) {
+     .container {
+         margin: 10px;
+         border-radius: var(--radius-sm);
+     }
+
+     .header {
+         padding: 20px;
+     }
+
+     .header h1 {
+         font-size: 2rem;
+     }
+
+     .content {
+         padding: 20px;
+         max-width: 1100px;
+         margin: auto;
+         background-color: #ffffff;
+         padding: 30px;
+         border-radius: 12px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+     }
+
+     .product-main {
+         grid-template-columns: 1fr;
+         gap: 30px;
+     }
+
+     .info-grid {
+         grid-template-columns: 1fr;
+     }
+
+     .gallery-grid {
+         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+         gap: 15px;
+     }
+
+     .action-buttons {
+         flex-direction: column;
+     }
+
+     .price {
+         font-size: 2rem;
+     }
+ }
+
+
+ /* ###########################################
+ ######### Product Details CSS Start #########
+ ############################################ */

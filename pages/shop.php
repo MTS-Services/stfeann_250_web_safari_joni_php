@@ -37,7 +37,7 @@ $currentPage = isset($_GET['paginate']) && is_numeric($_GET['paginate'])
                 <div class="shop-grid">
                     <?php foreach ($products as $product): ?>
                         <div class="product-card">
-                            <a class="product-card-link" href="<?= BASE_URL ?>product-detail-<?= $product['id'] ?>.php"
+                            <a class="product-card-link" href="?page=details&id=<?= $product['id'] ?>"
                                 aria-label="View Product <?= $product['name'] ?> details"></a>
                             <div class="product-card-image-wrapper">
                                 <img src="../public/images/n1.png" alt="<?= $product['name'] ?>" class="product-card-image"

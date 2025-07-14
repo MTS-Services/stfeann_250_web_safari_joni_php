@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Neville Rowland</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-background);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .breadcrumb i {
+            font-size: 12px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .product-main {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .image-section {
+            position: relative;
+        }
+
+        .primary-image {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .primary-image:hover {
+            transform: scale(1.02);
+        }
+
+        .primary-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .overlay-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .overlay-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .price-section {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 25px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .price-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .status-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge.active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge.featured {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .gallery-section {
+            margin-top: 50px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            border-radius: 2px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--background-color);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: var(--radius-sm);
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .product-main {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .price {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="breadcrumb">
+                <i class="fas fa-home"></i>
+                <span>Products</span>
+                <i class="fas fa-chevron-right"></i>
+                <span>Details</span>
+            </div>
+            <h1>Neville Rowland</h1>
+            <p class="subtitle">Premium Product Collection</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="product-main">
+                <!-- Image Section -->
+                <div class="image-section">
+                    <div class="primary-image">
+                        <img src="https://help.rangeme.com/hc/article_attachments/360006928633/what_makes_a_good_product_image.jpg"
+                            alt="Neville Rowland Product">
+                        <div class="image-overlay">
+                            <button class="overlay-btn" title="Zoom">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button class="overlay-btn" title="Share">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details Section -->
+                <div class="details-section">
+                    <!-- Price Section -->
+                    <div class="price-section">
+                        <div class="price">$202.00</div>
+                        <div class="price-label">Premium Quality Product</div>
+                    </div>
+
+                    <!-- Status Badges -->
+                    <div class="status-badges">
+                        <div class="badge active">
+                            <i class="fas fa-check-circle"></i>
+                            Active
+                        </div>
+                        <div class="badge featured">
+                            <i class="fas fa-star"></i>
+                            Featured
+                        </div>
+                    </div>
+
+                    <!-- Product Information -->
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-label">Product Slug</div>
+                            <div class="info-value">Aperiam eius est dol</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-label">Stock Number</div>
+                            <div class="info-value">Esse nulla molestiae</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-label">Category ID</div>
+                            <div class="info-value">#17</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-label">Description</div>
+                            <div class="info-value">Nam quis quia sint</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-label">Created Date</div>
+                            <div class="info-value">July 14, 2025</div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-label">Last Updated</div>
+                            <div class="info-value">July 14, 2025</div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                            Edit Product
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-copy"></i>
+                            Duplicate
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div class="gallery-section">
+                <h2 class="section-title">
+                    <i class="fas fa-images"></i>
+                    Product Gallery
+                </h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 1">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 2">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 3">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 4">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 5">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 6">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 7">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
+                            alt="Gallery Image 8">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            // Gallery item click handlers
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Add lightbox functionality here
+                    console.log('Gallery item clicked');
+                });
+            });
+
+            // Button click handlers
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    // Add loading state
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<div class="loading"></div> Processing...';
+                    this.disabled = true;
+
+                    // Simulate API call
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                    }, 2000);
+                });
+            });
+
+            // Overlay button handlers
+            const overlayBtns = document.querySelectorAll('.overlay-btn');
+            overlayBtns.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    console.log('Overlay button clicked');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

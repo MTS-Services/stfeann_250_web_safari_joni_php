@@ -15,7 +15,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : null;
 if (!empty($id)) {
     $data = getProduct($id);
 }
-
+$images = getProductImages($id);
 $products = getAllProducts();
 ?>
 <section id="detail" class="bg-white">
@@ -23,14 +23,14 @@ $products = getAllProducts();
         <div class="detail-container">
             <div class="detail-left">
                 <div class="detail-image-box">
-                    <img id="mainImage" src="../public/images/n1.png" alt="Main Product" class="detail-main-image" />
+                    <img id="mainImage" src="/public/uploads/products/<?= $data['product_image'] ?>" alt="Main Product"
+                        class="detail-main-image" />
                 </div>
                 <div class="detail-slider-wrapper">
                     <div id="thumbnailScroll" class="detail-no-scrollbar">
-                        <img src="../public/images/product (1).PNG" alt="Thumb 1" />
-                        <img src="../public/images/product (2).PNG" alt="Thumb 2" />
-                        <img src="../public/images/product (3).PNG" alt="Thumb 3" />
-                        <img src="../public/images/product (4).PNG" alt="Thumb 4" />
+                        <?php foreach ($images as $image): ?>
+                            <img src="/public/uploads/products/<?= $image['image'] ?>" alt="Thumb 2" />
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -73,16 +73,17 @@ $products = getAllProducts();
         <p>New arrivals for your wardrobe</p>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <?php foreach ($products as $product) : ?>
-                   
-                        <div class="swiper-slide detail-related-card">
-                            <img src="../public/images/product (<?= $product['id'] ?>).PNG" alt="Product Image <?= $i ?>" />
-                            <div class="detail-related-info">
-                                <h5><?= htmlspecialchars($product['name']) ?></h5>
-                                <h4>$<?= $product['price'] ?></h4>
-                            </div>
+                <?php foreach ($products as $product): ?>
+
+                    <div class="swiper-slide detail-related-card">
+                        <img src="/public/uploads/products/<?= $product['product_image'] ?>"
+                            alt="Product Image <?= $i ?>" />
+                        <div class="detail-related-info">
+                            <h5><?= htmlspecialchars($product['name']) ?></h5>
+                            <h4>$<?= $product['price'] ?></h4>
                         </div>
-                    
+                    </div>
+
                 <?php endforeach; ?>
             </div>
         </div>

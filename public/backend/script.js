@@ -26,20 +26,20 @@ window.addEventListener('resize', () => {
 ///////////////////////
 /// User Avatar Dropdown ///
 ///////////////////////
-    const avatar = document.getElementById('avatar');
-    const avatar_dropdown = document.getElementById('avatarDropdown');
+const avatar = document.getElementById('avatar');
+const avatar_dropdown = document.getElementById('avatarDropdown');
 
-    avatar.addEventListener('click', function (e) {
-        e.stopPropagation(); // Prevent click from bubbling to document
-        avatar_dropdown.style.display = 
-            avatar_dropdown.style.display === 'block' ? 'none' : 'block';
-    });
+avatar.addEventListener('click', function (e) {
+    e.stopPropagation(); // Prevent click from bubbling to document
+    avatar_dropdown.style.display =
+        avatar_dropdown.style.display === 'block' ? 'none' : 'block';
+});
 
-    document.addEventListener('click', function (e) {
-        if (!avatar.contains(e.target) && !avatar_dropdown.contains(e.target)) {
-            avatar_dropdown.style.display = 'none';
-        }
-    });
+document.addEventListener('click', function (e) {
+    if (!avatar.contains(e.target) && !avatar_dropdown.contains(e.target)) {
+        avatar_dropdown.style.display = 'none';
+    }
+});
 
 
 //////////////////////
@@ -60,3 +60,44 @@ document.addEventListener('click', function (e) {
         document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
     }
 });
+
+
+
+
+// // Add some interactive functionality
+// document.addEventListener('DOMContentLoaded', function () {
+//     // Gallery item click handlers
+//     const galleryItems = document.querySelectorAll('.gallery-item');
+//     galleryItems.forEach(item => {
+//         item.addEventListener('click', function () {
+//             // Add lightbox functionality here
+//             console.log('Gallery item clicked');
+//         });
+//     });
+
+//     // Button click handlers
+//     const buttons = document.querySelectorAll('.btn');
+//     buttons.forEach(button => {
+//         button.addEventListener('click', function (e) {
+//             // Add loading state
+//             const originalText = this.innerHTML;
+//             this.innerHTML = '<div class="loading"></div> Processing...';
+//             this.disabled = true;
+
+//             // Simulate API call
+//             setTimeout(() => {
+//                 this.innerHTML = originalText;
+//                 this.disabled = false;
+//             }, 2000);
+//         });
+//     });
+
+//     // Overlay button handlers
+//     const overlayBtns = document.querySelectorAll('.overlay-btn');
+//     overlayBtns.forEach(btn => {
+//         btn.addEventListener('click', function (e) {
+//             e.stopPropagation();
+//             console.log('Overlay button clicked');
+//         });
+//     });
+// });
