@@ -1,5 +1,3 @@
-
-
 <section class="navbar_page-wrapper">
     <nav class="navbar_navbar">
         <div class="navbar_navbar-container">
@@ -43,7 +41,7 @@
 
                 <div class="navbar_nav-actions">
                     <form action="/../includes/search.php" method="POST" class="navbar_search-form">
-                        <div class="navbar_search-input-group">
+                        <div class="navbar_search-input-group" id="search-input-group">
                             <input type="text" name="search" placeholder="Search Keyword" class="navbar_search-input" />
                             <button type="submit" class="navbar_search-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="navbar_icon" fill="none"
@@ -56,17 +54,24 @@
                     </form>
 
                     <div class="navbar_user-action">
+                        <span id="search-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="navbar_icon" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </span>
                         <a href="<?php
-                        if (isLoggedIn()) {
-                            if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
-                                echo '/backend.php?page=dashboard';
-                            } else {
-                                echo '/?page=profile';
-                            }
-                        } else {
-                            echo '?page=login';
-                        }
-                        ?>" class="navbar_user-button">
+                                    if (isLoggedIn()) {
+                                        if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1) {
+                                            echo '/backend.php?page=dashboard';
+                                        } else {
+                                            echo '/?page=profile';
+                                        }
+                                    } else {
+                                        echo '?page=login';
+                                    }
+                                    ?>" class="navbar_user-button">
                             <svg class="navbar_icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
