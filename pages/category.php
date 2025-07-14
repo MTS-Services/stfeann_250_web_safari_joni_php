@@ -48,6 +48,11 @@
                 grid-template-columns: repeat(3, 1fr);
             }
         }
+        @media (max-width: 640px) {
+            .category-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
  
         @media (min-width: 1280px) {
             .category-grid {
