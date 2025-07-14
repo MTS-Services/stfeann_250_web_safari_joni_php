@@ -6,7 +6,7 @@ try {
     $pdo->beginTransaction();
 
     // Basic validation
-    $requiredFields = ['name', 'slug', 'price', 'category_id','stock_no'];
+    $requiredFields = ['name', 'slug', 'price', 'category_id', 'stock_no'];
     $hasError = false;
 
     foreach ($requiredFields as $field) {
@@ -51,7 +51,7 @@ try {
     // Handle images
     $errors = [];
     $uploaded_count = 0;
-    $upload_dir = __DIR__ . "/../../uploads/products/";
+    $upload_dir = __DIR__ . "/../../public/uploads/products/";
 
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0777, true);
@@ -59,7 +59,8 @@ try {
 
     if (!empty($_FILES['images']['name']) && is_array($_FILES['images']['name'])) {
         foreach ($_FILES['images']['name'] as $key => $imgName) {
-            if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK) continue;
+            if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK)
+                continue;
 
             $tmp_name = $_FILES['images']['tmp_name'][$key];
             $new_file = time() . '_' . basename($imgName);

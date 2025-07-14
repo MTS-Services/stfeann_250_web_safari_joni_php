@@ -47,20 +47,18 @@ function getAllProducts()
     SELECT 
         products.*, 
         categories.name AS category_name,
-        product_images.*
+        product_images.image AS product_image
     FROM products
     LEFT JOIN categories ON products.category_id = categories.id
-    LEFT JOIN product_images 
-        ON product_images.product_id = products.product_id
-        AND product_images.product_id
-    ORDER BY products.sort_order ASC
+    LEFT JOIN product_images ON product_images.product_id = products.id
+    ORDER BY products.updated_at DESC
 ");
 
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getAllProductImages($product_id)
+function getProductImages($product_id)
 {
     global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id = ?");
@@ -95,9 +93,13 @@ function getProduct($id)
 {
     global $pdo;
     $stmt = $pdo->prepare("
-        SELECT products.*, categories.name AS category_name 
-        FROM products 
-        LEFT JOIN categories ON products.category_id = categories.id 
+        SELECT 
+        products.*, 
+        categories.name AS category_name,
+        product_images.image AS product_image
+        FROM products
+        LEFT JOIN categories ON products.category_id = categories.id
+        LEFT JOIN product_images ON product_images.product_id = products.id
         WHERE products.id = ?
     ");
     $stmt->execute([$id]);

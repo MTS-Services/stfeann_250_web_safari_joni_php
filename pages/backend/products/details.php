@@ -5,17 +5,16 @@ require_once __DIR__ . '/../../../config/function.php';
 
 $id = $_GET['id'] ?? null;
 
-$product = getAllProducts();
-var_dump($product);
-die();
+$product = getProduct($id);
+$images = getProductImages($id);
+
 ?>
 <div class="content">
     <div class="product-main">
         <!-- Image Section -->
         <div class="image-section">
             <div class="primary-image">
-                <img src="https://help.rangeme.com/hc/article_attachments/360006928633/what_makes_a_good_product_image.jpg"
-                    alt="Neville Rowland Product">
+                <img src="/public/uploads/products/<?= $product['product_image'] ?>" alt="Neville Rowland Product">
             </div>
         </div>
 
@@ -23,7 +22,8 @@ die();
         <div class="details-section">
             <!-- Price Section -->
             <div class="price-section">
-                <div class="price">$202.00</div>
+                <h1><?= $product['name'] ?></h1>
+                <div class="price">€<?= $product['price'] ?></div>
                 <div class="price-label">Premium Quality Product</div>
             </div>
 
@@ -31,11 +31,11 @@ die();
             <div class="status-badges">
                 <div class="badge active">
                     <i class="fas fa-check-circle"></i>
-                    Active
+                    <?= $product['status'] == 1 ? 'Active' : 'Inactive' ?>
                 </div>
                 <div class="badge featured">
                     <i class="fas fa-star"></i>
-                    Featured
+                    <?= $product['is_featured'] == 1 ? 'Featured' : 'Not Featured' ?>
                 </div>
             </div>
 
@@ -43,44 +43,36 @@ die();
             <div class="info-grid">
                 <div class="info-card">
                     <div class="info-label">Product Slug</div>
-                    <div class="info-value">Aperiam eius est dol</div>
+                    <div class="info-value"><?= $product['slug'] ?></div>
                 </div>
                 <div class="info-card">
                     <div class="info-label">Stock Number</div>
-                    <div class="info-value">Esse nulla molestiae</div>
+                    <div class="info-value"><?= $product['stock_no'] ?></div>
                 </div>
                 <div class="info-card">
-                    <div class="info-label">Category ID</div>
-                    <div class="info-value">#17</div>
+                    <div class="info-label">Category</div>
+                    <div class="info-value"><?= $product['category_name'] ?></div>
                 </div>
                 <div class="info-card">
                     <div class="info-label">Description</div>
-                    <div class="info-value">Nam quis quia sint</div>
+                    <div class="info-value"><?= $product['description'] ?></div>
                 </div>
                 <div class="info-card">
                     <div class="info-label">Created Date</div>
-                    <div class="info-value">July 14, 2025</div>
+                    <div class="info-value"><?= date('Y-m-d', strtotime($product['created_at'])) ?></div>
                 </div>
                 <div class="info-card">
                     <div class="info-label">Last Updated</div>
-                    <div class="info-value">July 14, 2025</div>
+                    <div class="info-value"><?= date('Y-m-d', strtotime($product['updated_at'])) ?></div>
                 </div>
             </div>
 
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="btn btn-primary">
+                <a class="btn btn-primary" href="/backend.php?folder=products&page=edit&id=<?= $product['id'] ?>">
                     <i class="fas fa-edit"></i>
                     Edit Product
-                </button>
-                <button class="btn btn-secondary">
-                    <i class="fas fa-copy"></i>
-                    Duplicate
-                </button>
-                <button class="btn btn-secondary">
-                    <i class="fas fa-download"></i>
-                    Export
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -92,62 +84,14 @@ die();
             Product Gallery
         </h2>
         <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 1">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
+            <?php foreach ($images as $image): ?>
+                <div class="gallery-item">
+                    <img src="/public/uploads/products/<?= $image['image'] ?>" alt="Gallery Image 1">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-expand"></i>
+                    </div>
                 </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 2">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 3">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 4">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 5">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 6">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 7">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg"
-                    alt="Gallery Image 8">
-                <div class="gallery-overlay">
-                    <i class="fas fa-expand"></i>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

@@ -60,7 +60,7 @@ try {
     // Upload image logic
     $errors = [];
     $uploaded_count = 0;
-    $upload_dir = __DIR__ . "/../../uploads/products/";
+    $upload_dir = __DIR__ . "/../../public/uploads/products/";
 
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0777, true);
@@ -73,7 +73,7 @@ try {
         $new_images_uploaded = !empty($_FILES['images']['name']) &&
             is_array($_FILES['images']['name']) &&
             array_filter($_FILES['images']['name']);
-            
+
         $oldImages->execute([$id]);
         if ($new_images_uploaded) {
             foreach ($oldImages->fetchAll() as $img) {
@@ -85,13 +85,14 @@ try {
         }
 
         // Step 2: Delete from DB
-        if($new_images_uploaded) {
+        if ($new_images_uploaded) {
             $pdo->prepare("DELETE FROM product_images WHERE product_id = ?")->execute([$id]);
         }
 
         // Step 3: Insert new images
         foreach ($_FILES['images']['name'] as $key => $imgName) {
-            if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK) continue;
+            if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK)
+                continue;
 
             $tmp_name = $_FILES['images']['tmp_name'][$key];
             $new_file = time() . '_' . basename($imgName);

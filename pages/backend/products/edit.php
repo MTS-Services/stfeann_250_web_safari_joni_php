@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../../config/function.php';
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : null;
 $category_names = getAllCategoryNames();
-$produt_images = getAllProductImages($id);
+$produt_images = getProductImages($id);
 
 
 
@@ -25,7 +25,8 @@ if (!empty($id)) {
     $data = getProduct($id);
 }
 ?>
-<form class="table-container" action="../../../backend/products/update.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
+<form class="table-container" action="../../../backend/products/update.php?id=<?= $id ?>" method="POST"
+    enctype="multipart/form-data">
     <div class="table-header">
         <h2 class="table-title">Product Edit</h2>
         <a href="/backend.php?folder=products&page=index" class="create_button">Back</a>

@@ -18,6 +18,7 @@ if ($id) {
             <tr>
                 <th>ID</th>
                 <th>Product</th>
+                <th>Image</th>
                 <th>Category</th>
                 <th>Price</th>
                 <th>Status</th>
@@ -26,15 +27,21 @@ if ($id) {
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody></tbody>
-            <?php foreach ($products as $product) : ?>
+        <tbody>
+            <?php foreach ($products as $product): ?>
                 <tr>
                     <td><?= $product['id'] ?></td>
                     <td><?= $product['name'] ?></td>
+                    <td><img src="/public/uploads/products/<?= $product['product_image'] ?>" alt="" width="50px"
+                            height="50px"></td>
                     <td><?= $product['category_name'] ?></td>
                     <td><?= $product['price'] ?></td>
-                    <td style="width: 10%;"><span class="status-badge <?= $product['status'] == 1 ? 'success' : 'error' ?>"><?= $product['status'] == 1 ? 'Active' : 'Inactive' ?></span></td>
-                    <td><span class="status-badge <?= $product['is_featured'] == 1 ? 'success' : 'error' ?>"><?= $product['is_featured'] == 1 ? 'Yes' : 'No' ?></span></td>
+                    <td style="width: 10%;"><span
+                            class="status-badge <?= $product['status'] == 1 ? 'success' : 'error' ?>"><?= $product['status'] == 1 ? 'Active' : 'Inactive' ?></span>
+                    </td>
+                    <td><span
+                            class="status-badge <?= $product['is_featured'] == 1 ? 'success' : 'error' ?>"><?= $product['is_featured'] == 1 ? 'Yes' : 'No' ?></span>
+                    </td>
                     <td><?= $product['created_at'] ?></td>
                     <td style="width: 10%;">
                         <div class="action-icon dropdown">
@@ -43,10 +50,14 @@ if ($id) {
                                 <a href="/backend.php?folder=products&page=edit&id=<?= $product['id'] ?>">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
-                                <a href="../../../backend/products/toggle_status.php?id=<?= $product['id'] ?>"><i class="fa fa-toggle-on"></i><?php echo $product['status'] == 1 ? ' Inactive' : ' Active' ?></a>
-                                <a href="../../../backend/products/featured.php?id=<?= $product['id'] ?>"><i class="fa fa-toggle-on"></i><?php echo $product['is_featured'] == 1 ? ' Unset Featured' : ' Set Featured' ?></a>
-                                <a href="/backend.php?folder=products&page=details&id=<?= $product['id'] ?>"><i class="fa fa-eye"></i> Details</a>
-                                <a href="../../../backend/products/delete.php?id=<?= $product['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
+                                <a href="../../../backend/products/toggle_status.php?id=<?= $product['id'] ?>"><i
+                                        class="fa fa-toggle-on"></i><?php echo $product['status'] == 1 ? ' Inactive' : ' Active' ?></a>
+                                <a href="../../../backend/products/featured.php?id=<?= $product['id'] ?>"><i
+                                        class="fa fa-toggle-on"></i><?php echo $product['is_featured'] == 1 ? ' Unset Featured' : ' Set Featured' ?></a>
+                                <a href="/backend.php?folder=products&page=details&id=<?= $product['id'] ?>"><i
+                                        class="fa fa-eye"></i> Details</a>
+                                <a href="../../../backend/products/delete.php?id=<?= $product['id'] ?>"
+                                    onclick="return confirm('Are you sure to delete this item?')">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
                             </div>
