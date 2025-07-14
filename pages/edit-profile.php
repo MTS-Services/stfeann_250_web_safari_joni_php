@@ -4,28 +4,9 @@ include_once __DIR__ . '/../config/function.php';
 
 $id = $_SESSION['user_id'] ?? null;
 if (!$id) {
-    die("User not logged in.");
+  die("User not logged in.");
 }
-
 $user = getUser($id);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name  = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $image = $user['image']; // Default value
-
-    if (!empty($_FILES['image']['name'])) {
-        $filename = time() . '_' . basename($_FILES['image']['name']);
-        $image = "uploads/" . $filename;
-        move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . "/../$image");
-    }
-
-    $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ?, image = ? WHERE id = ?");
-    $stmt->execute([$name, $email, $image, $id]);
-
-    header("Location: ?page=profile");
-    exit;
-}
 ?>
 
 <section class="profile_section_user">
@@ -36,7 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="?page=profile" class="edit-button">Back</a>
     </div>
 
-    <form method="POST" enctype="multipart/form-data" class="profile-form">
+
+    <form method="POST" action="/pages/update-profile.php" enctype="multipart/form-data" class="profile-form">
+      <input type="hidden" name="id" value="<?= $user['id'] ?>">
       <label>
         Name:
         <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" required>
@@ -81,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     margin-bottom: 20px;
   }
 
- 
+
   .profile-form {
     display: flex;
     flex-direction: column;
