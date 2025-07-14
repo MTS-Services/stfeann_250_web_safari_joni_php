@@ -76,8 +76,7 @@ $products = getAllProducts();
                 <?php foreach ($products as $product): ?>
 
                     <div class="swiper-slide detail-related-card">
-                        <img src="/public/uploads/products/<?= $product['product_image'] ?>"
-                            alt="Product Image <?= $i ?>" />
+                        <img src="/public/uploads/products/<?= $product['product_image'] ?>" alt="Product Image" />
                         <div class="detail-related-info">
                             <h5><?= htmlspecialchars($product['name']) ?></h5>
                             <h4>$<?= $product['price'] ?></h4>
