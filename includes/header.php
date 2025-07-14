@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="navbar_logo-container">
-                    <a href="#" class="navbar_logo-link">
+                    <a href="?page=home" class="navbar_logo-link">
                         <img src="../public/images/header-logo.png" alt="Valgrit Logo" class="navbar_logo-image">
                     </a>
                 </div>
@@ -37,13 +37,10 @@
                         Sobre nós
                         <span class="navbar_nav-link-underline"></span>
                     </a>
-                    <a href="?page=profile" class="navbar_nav-link">
-                        Profile
-                        <span class="navbar_nav-link-underline"></span>
-                    </a>
                 </div>
 
                 <div class="navbar_nav-actions">
+
                     <form action="#" method="GET" class="navbar_search-form">
                         <div class="navbar_search-input-group">
                             <input type="text" name="search" placeholder="Search Keyword" class="navbar_search-input" />
@@ -58,36 +55,25 @@
                     </form>
 
                     <div class="navbar_user-action">
-                        <button id="open-user-modal-button" class="navbar_user-button">
+                        <a href="<?php
+                                    if (isLoggedIn()) {
+                                        if ($_SESSION['is_admin'] == 1) {
+                                            echo '/backend.php?page=dashboard';
+                                        } else {
+                                            echo '?page=profile';
+                                        }
+                                    } else {
+                                        echo '?page=login';
+                                    }
+                                    ?>" class="navbar_user-button">
                             <svg class="navbar_icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                        </button>
-                        <dialog id="user-modal" class="navbar_user-modal">
-                            <div class="navbar_modal-content">
-                                <h3>Welcome!</h3>
-                                <div class="navbar_modal-buttons-inline">
-                                    <a href="<?= isLoggedIn() ? '/backend.php?page=dashboard' : '/backend.php?page=dashboard' ?>
-                                    " class="navbar_modal-button navbar_primary-button">
-                                        <?= isLoggedIn() ? 'Dashboard' : "Login" ?>
-                                    </a>
-                                    <a href="?page=register" class="navbar_modal-button navbar_secondary-button">Create
-                                        Account</a>
-                                </div>
-                                <div class="navbar_modal-admin-login">
-                                    <a href="#" class="navbar_modal-button navbar_admin-button">Admin Login</a>
-                                </div>
-                                <div class="navbar_modal-actions">
-                                    <button id="close-user-modal-button"
-                                        class="navbar_modal-close-button">Close</button>
-                                </div>
-                            </div>
-                        </dialog>
+                        </a>
+
                     </div>
-
-
 
                 </div>
             </div>

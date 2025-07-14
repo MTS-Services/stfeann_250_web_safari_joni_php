@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     try {
         $pdo = getDBConnection();
-        $stmt = $pdo->prepare("SELECT id, name, email, password FROM users WHERE email = ?");
+        $stmt = $pdo->prepare("SELECT id, name, email, password, is_admin FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
@@ -22,8 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['name'];
             $_SESSION['user_email'] = $user['email'];
-            
-            header('Location: /../backend.php?page=dashboard');
+            $_SESSION['is_admin'] = $user['is_admin'];
+
+            if ($user['is_admin'] == 1) {
+                header('Location: /../backend.php?page=dashboard');
+            } else {
+                header('Location: ../../?page=profile');
+            }
             exit();
         } else {
             $_SESSION['error'] = 'Invalid email or password';

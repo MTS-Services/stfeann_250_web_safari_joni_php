@@ -790,6 +790,7 @@
   position: relative;
 }  */
 
+
 /* Container */
 .profile-container {
   max-width: 1200px;
@@ -899,7 +900,7 @@
 }
 .edit-button-wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 20px;
 }
 
