@@ -2355,7 +2355,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 
 .search_page_product-image {
     position: relative;
-    max-width: 100%;
+    max-width: 30%;
     min-width: 30%;
     overflow: hidden;
     padding: 10px;
