@@ -45,6 +45,7 @@ if ($id) {
                                 </a>
                                 <a href="../../../backend/products/toggle_status.php?id=<?= $product['id'] ?>"><i class="fa fa-toggle-on"></i><?php echo $product['status'] == 1 ? ' Inactive' : ' Active' ?></a>
                                 <a href="../../../backend/products/featured.php?id=<?= $product['id'] ?>"><i class="fa fa-toggle-on"></i><?php echo $product['is_featured'] == 1 ? ' Unset Featured' : ' Set Featured' ?></a>
+                                <a href="/backend.php?folder=products&page=details&id=<?= $product['id'] ?>"><i class="fa fa-eye"></i> Details</a>
                                 <a href="../../../backend/products/delete.php?id=<?= $product['id'] ?>" onclick="return confirm('Are you sure to delete this item?')">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
