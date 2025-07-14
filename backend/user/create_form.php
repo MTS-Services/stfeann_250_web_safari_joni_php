@@ -37,8 +37,7 @@ if ($errors) {
     exit;
 }
 
-// Handle image upload
-    $image = '';
+$image = '';
     if (!empty($_FILES['image']['name'])) {
         $uploadDir = __DIR__ . '/../../public/uploads/';
         if (!is_dir($uploadDir) && !mkdir($uploadDir, 0755, true)) {

@@ -46,21 +46,6 @@
             <label>Confirm Password</label>
             <input type="password" name="confirm_password">
         </div>
-        <div class="create_form_group">
-            <label>Status</label>
-            <select name="status">
-                <option value="1">Active</option>
-                <option value="0">Inactive</option>
-            </select>
-        </div>
-
-        <div class="create_form_group">
-            <label>Is Admin</label>
-            <select name="is_admin">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-            </select>
-        </div>
     </div>
     <button class="create_submit_btn" type="submit">Create</button>
 </form>

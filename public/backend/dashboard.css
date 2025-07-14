@@ -358,6 +358,10 @@
      background: #dcfce7;
      color: #16a34a;
  }
+ .stat-icon.green2 {
+     background: #f2fcdc;
+     color: #40e60e;
+ }
 
  .stat-icon.yellow {
      background: #fef3c7;
