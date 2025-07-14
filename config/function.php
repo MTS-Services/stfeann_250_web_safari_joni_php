@@ -17,12 +17,6 @@ function getCategory($id)
     $stmt->execute([$id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-// function getAllCategoryNames()
-// {
-//     global $pdo;
-//     $stmt = $pdo->query("SELECT name FROM categories ORDER BY sort_order ASC");
-//     return $stmt->fetchAll(PDO::FETCH_COLUMN);
-// }
 function getAllCategoryNames()
 {
     global $pdo;
@@ -50,6 +44,14 @@ function getAllProducts()
         ORDER BY products.sort_order ASC
     ");
 
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getAllProductImages($product_id)
+{
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id = ?");
+    $stmt->execute([$product_id]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
