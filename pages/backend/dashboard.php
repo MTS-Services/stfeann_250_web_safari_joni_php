@@ -1,18 +1,31 @@
-<div class="stats-grid">
-    <div class="stat-card">
-        <div class="stat-header">
-            <div class="stat-title">Total Revenue</div>
-            <div class="stat-icon blue">
-                <i class="fas fa-dollar-sign"></i>
-            </div>
-        </div>
-        <div class="stat-value">$45,231</div>
-        <div class="stat-change positive">
-            <span><i class="fas fa-arrow-up"></i></span>
-            <span>+20.1% from last month</span>
-        </div>
-    </div>
+<?php
+include_once __DIR__ . '/../../config/config.php';
+include_once __DIR__ . '/../../config/function.php';
 
+// Get all users
+$all_users = getAllUsers();
+
+
+$active_users = 0;
+foreach ($all_users as $user) {
+    if (isset($user['status']) && $user['status'] == 1) {
+        $active_users++;
+    }
+}
+
+$active_admins = 0;
+foreach ($all_users as $user) {
+    if (isset($user['is_admin']) && $user['is_admin'] == 1) {
+        $active_admins++;
+    }
+}
+
+// Get product and category counts
+$product_count = count(getAllProducts());
+$categories = count(getAllCategories());
+?>
+
+<div class="stats-grid">
     <div class="stat-card">
         <div class="stat-header">
             <div class="stat-title">Active Users</div>
@@ -20,38 +33,38 @@
                 <i class="fas fa-users"></i>
             </div>
         </div>
-        <div class="stat-value"><?php echo $_SESSION['user_id']; ?></div>
-        <div class="stat-change positive">
-            <span><i class="fas fa-arrow-up"></i></span>
-            <span>+15.3% from last month</span>
-        </div>
+        <div class="stat-value"><?php echo $active_users; ?></div>
+        <div class="stat-change positive"></div>
     </div>
-
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-title">Orders</div>
+            <div class="stat-title">Active Admins</div>
+            <div class="stat-icon green2">
+                <i class="fas fa-user-shield"></i>
+            </div>
+        </div>
+        <div class="stat-value"><?php echo $active_admins; ?></div>
+        <div class="stat-change positive"></div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-title">Total Categories</div>
             <div class="stat-icon yellow">
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-th-large"></i> <!-- Grid icon for categories -->
             </div>
         </div>
-        <div class="stat-value">1,234</div>
-        <div class="stat-change negative">
-            <span><i class="fas fa-arrow-down"></i></span>
-            <span>-5.2% from last month</span>
-        </div>
+        <div class="stat-value"><?php echo $categories; ?></div>
+        <div class="stat-change negative"></div>
     </div>
-
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-title">Conversion Rate</div>
-            <div class="stat-icon red">
-                <i class="fas fa-chart-line"></i>
+            <div class="stat-title">Total Products</div>
+            <div class="stat-icon blue">
+                <i class="fas fa-box"></i> <!-- Box icon for products -->
             </div>
         </div>
-        <div class="stat-value">3.24%</div>
-        <div class="stat-change positive">
-            <span><i class="fas fa-arrow-up"></i></span>
-            <span>+2.1% from last month</span>
-        </div>
+        <div class="stat-value"><?php echo $product_count; ?></div>
+        <div class="stat-change positive"></div>
     </div>
+
 </div>

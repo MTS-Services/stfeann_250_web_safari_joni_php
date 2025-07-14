@@ -10,8 +10,6 @@ $data = [
     'image' => '',
     'password' => '',
     'confirm_password' => '',
-    'status' => '',
-    'is_admin' => ''    
 ];
 
 if (!empty($id)) {
@@ -39,7 +37,7 @@ if (!empty($id)) {
 
 <form class="create_form_container" action="../../../backend/user/update_form.php" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $id ?>">
-    
+
     <div class="table-header">
         <h2 class="table-title">User Edit</h2>
         <a href="/backend.php?folder=user&page=index" class="create_button">Back</a>
@@ -48,26 +46,18 @@ if (!empty($id)) {
     <div class="main_create_form">
         <div class="create_form_group">
             <label>Name</label>
-            <input type="text" name="name" value="<?= htmlspecialchars($data['name']) ?>" >
+            <input type="text" name="name" value="<?= htmlspecialchars($data['name']) ?>">
         </div>
 
         <div class="create_form_group">
             <label>Email</label>
-            <input type="email" name="email" value="<?= htmlspecialchars($data['email']) ?>" >
+            <input type="email" name="email" value="<?= htmlspecialchars($data['email']) ?>">
         </div>
-
+   
+        
         <div class="create_form_group">
-            <label>Current Image</label><br>
-            <?php if (!empty($data['image'])): ?>
-                <img src="/uploads/<?= htmlspecialchars($data['image']) ?>" alt="User Image" width="100">
-            <?php else: ?>
-                <p>No image uploaded</p>
-            <?php endif; ?>
-        </div>
-
-        <div class="create_form_group">
-            <label>Upload New Image</label>
-            <input type="file" name="image" accept="image/*">
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image">
         </div>
 
         <div class="create_form_group">
@@ -78,22 +68,6 @@ if (!empty($id)) {
         <div class="create_form_group">
             <label>Confirm Password</label>
             <input type="password" name="confirm_password" placeholder="Leave blank to keep unchanged">
-        </div>
-
-        <div class="create_form_group">
-            <label>Status</label>
-            <select name="status">
-                <option value="1" <?= $data['status'] == 1 ? 'selected' : '' ?>>Active</option>
-                <option value="0" <?= $data['status'] == 0 ? 'selected' : '' ?>>Inactive</option>
-            </select>
-        </div>
-
-        <div class="create_form_group">
-            <label>Is Admin</label>
-            <select name="is_admin">
-                <option value="0" <?= $data['is_admin'] == 0 ? 'selected' : '' ?>>No</option>
-                <option value="1" <?= $data['is_admin'] == 1 ? 'selected' : '' ?>>Yes</option>
-            </select>
         </div>
     </div>
 
