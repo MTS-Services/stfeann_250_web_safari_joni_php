@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="navbar_nav-actions">
-                    <form action="#" method="GET" class="navbar_search-form">
+                    <form action="/../includes/search.php" method="POST" class="navbar_search-form">
                         <div class="navbar_search-input-group">
                             <input type="text" name="search" placeholder="Search Keyword" class="navbar_search-input" />
                             <button type="submit" class="navbar_search-button">
