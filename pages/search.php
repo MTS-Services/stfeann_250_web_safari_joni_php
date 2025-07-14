@@ -215,6 +215,7 @@ $products = getSearchProducts($searchValue);
     .search_page_section {
       margin: 2rem 0;
       padding: 1rem 0.5rem;
+      padding-top: 4.5rem;
     }
 
     .search_page_title {
