@@ -3,8 +3,6 @@
 require_once __DIR__ . '../../../config/config.php';
 
 $pdo = getDBConnection();
-// var_dump( $_FILES['images']['name']);
-// die();
 
 // Check if files were uploaded and if it's an array (for multiple uploads)
 if (!empty($_FILES['images']['name']) && is_array($_FILES['images']['name'])) {
