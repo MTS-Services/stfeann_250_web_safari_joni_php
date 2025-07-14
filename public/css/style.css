@@ -863,8 +863,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 }
 
 .about-description-text-side {
-    width: 100%;
-    height: 300px;
+     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 2rem;
@@ -884,8 +883,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 }
 
 .about-description-image-side {
-    width: 100%;
-    height: 300px;
+     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -2553,7 +2551,7 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
 /* 📱------------------------------------------------------------------------- details page ------------------------------------------------------------*/
 
 #detail {
-    margin-top: 70rem;
+    margin-top: 70px;
 }
 
 /* Container for details page */
@@ -2954,4 +2952,190 @@ html.navbar_dark .navbar_mobile-nav-link:hover {
     .detail-options>div {
         max-width: 100%;
     }
+}
+
+
+/*-------------------------------------------- profile----------------------------- */
+
+.profile_section_user {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 250px;
+    margin-bottom: 150px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    animation: fadeIn 0.7s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #70e1f5 0%, #ffd194 100%);
+    padding: 40px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.profile-avatar-wrapper {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid #fff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background: #eee;
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.profile-main {
+    padding: 25px;
+}
+
+.profile-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+}
+
+.contact-grid {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+}
+
+.contact-grid li {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fafafa;
+    transition: background 0.3s;
+}
+
+.contact-grid li:hover {
+    background: #f0f0f0;
+}
+
+.contact-grid li strong {
+    color: #555;
+    font-weight: 600;
+}
+
+.contact-grid li a {
+    color: #1d89ff;
+    text-decoration: none;
+}
+
+.button-wrapper {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* optional gap between items */
+}
+
+.button-wrapper a {
+    text-decoration: none;
+    padding: 10px 20px;
+    /* Example color */
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+.logout-edit-button {
+    display: inline-block;
+    padding: 14px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #8b2730 0%, #f70000 100%);
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.logout-edit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+.edit-button {
+    display: inline-block;
+    padding: 14px 35px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.edit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+@media(max-width: 480px) {
+    .profile-name {
+        font-size: 22px;
+    }
+
+    .contact-grid li {
+        font-size: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .edit-button {
+        font-size: 14px;
+        padding: 12px 25px;
+    }
+}
+
+
+/* profile edit */
+
+.edit-button-wrapper {
+    display: flex;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.edit-button-wrapper a {
+    text-decoration: none;
+    padding: 10px 20px;
+    /* Example color */
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
 }

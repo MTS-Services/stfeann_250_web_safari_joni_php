@@ -2,6 +2,8 @@
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/function.php';
 
+
+
 $page = $_GET['page'] ?? 'home';
 $pageTitle = ucfirst($page); // Optional: for title display
 

@@ -1,18 +1,20 @@
 <?php
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'stfeann_250');
+define('DB_NAME', 'newschema');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'root');
 define('APP_NAME', 'Valgrit');
 define('BASE_URL', 'http://localhost/valgrit');
+define("PORT", 3307);
 
-function getDBConnection() {
+function getDBConnection()
+{
     try {
-        $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+        $pdo = new PDO("mysql:host=" . DB_HOST . ";port=" . PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
-    } catch(PDOException $e) {
+    } catch (PDOException $e) {
         die("Connection failed: " . $e->getMessage());
     }
 }
@@ -24,22 +26,26 @@ $pdo = getDBConnection();
 session_start();
 
 // Security functions
-function sanitizeInput($data) {
+function sanitizeInput($data)
+{
     return htmlspecialchars(strip_tags(trim($data)));
 }
 
-function isLoggedIn() {
+function isLoggedIn()
+{
     return isset($_SESSION['user_id']);
 }
 
-function redirectIfNotLoggedIn() {
+function redirectIfNotLoggedIn()
+{
     if (!isLoggedIn()) {
         header('Location: index.php');
         exit();
     }
 }
 
-function redirectIfLoggedIn() {
+function redirectIfLoggedIn()
+{
     if (isLoggedIn()) {
         header('Location: pages/backend/dashboard.php');
         exit();

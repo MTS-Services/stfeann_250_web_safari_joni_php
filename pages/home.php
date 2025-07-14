@@ -84,15 +84,22 @@
                 <img src="../public/images/Foto_Principal.jpg" alt="Woman in athletic wear posing" class="home_page_about-image">
             </div>
             <div class="home_page_about-content">
-                <h1 class="home_page_section-title">Experimente a Diferença da Valgrit</h1>
+                <h1 class="home_page_section-title">Experimente a Diferença da Valgrit: Qualidade Que Se Sente em Cada Fibra!</h1>
                 <p>
                     Na Valgrit, não vendemos apenas roupa desportiva – entregamos uma experiência de performance e conforto incomparáveis.
-                    <br><strong>Porque Escolher Valgrit?</strong><br>
-                    - Durabilidade Superior: resistente ao treino intenso e lavagens frequentes.<br>
-                    - Conforto Inigualável: tecidos respirráveis que se movem consigo.<br>
-                    - Estilo Que Inspira: designs modernos que aumentam a confiança.<br>
-                    - Investimento Inteligente: peças que duram anos.<br>
-                    <br>Não se contente com menos. Eleve o seu treino com Valgrit!
+  Cada peça é cuidadosamente desenhada e fabricada com os melhores materiais, garantindo que se sinta no seu melhor, quer esteja a superar os seus limites no ginásio ou a desfrutar de uma corrida ao ar livre.
+<br/><br/>
+Porque Escolher Valgrit?
+<br/><br/>
+Durabilidade Superior: Feita para durar, a nossa roupa resiste ao desgaste do treino intenso e às lavagens frequentes, mantendo a sua forma e cor como novas por muito mais tempo. Diga adeus à roupa que cede ou desbota após algumas utilizações!
+<br/><br/>
+Conforto Inigualável: Selecionamos tecidos respiráveis e de toque suave que se movem consigo, proporcionando liberdade total de movimentos e mantendo a sua pele fresca e seca, mesmo nos treinos mais exigentes. Sinta a diferença de um conforto que o impulsiona.
+<br/><br/>
+Estilo Que Inspira: Com designs modernos e cortes que realçam a sua silhueta, a roupa Valgrit fará com que se sinta confiante e motivado. Porque sabemos que quando se sente bem, treina melhor.
+<br/><br/>
+Investimento Inteligente: Ao escolher Valgrit, está a investir em peças que o acompanharão nas suas jornadas desportivas por anos. Menos compras, mais treinos, mais resultados.
+
+  Não se contente com menos. Eleve o seu treino e o seu estilo com a Valgrit. Sinta a qualidade, viva a performance! Visite a nossa loja online e descubra a peça perfeita para si.
                 </p>
             </div>
         </div>
