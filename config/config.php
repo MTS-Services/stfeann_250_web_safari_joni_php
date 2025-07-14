@@ -1,12 +1,12 @@
 <?php
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'stfeann_250');
+define('DB_NAME', 'newschema');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'root');
 define('APP_NAME', 'Valgrit');
 define('BASE_URL', 'http://localhost/valgrit');
-define("PORT", 3306);
+define("PORT", 3307);
 
 function getDBConnection()
 {
